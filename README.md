@@ -1,2 +1,8 @@
-# Projet-facto-GN
+# Factorisation des grands nombres
+
+## Projet Math-Info - Semestre 6
+
+Decker Benjamin & Le Boulc'h Erin
+
+Tuteur : M. Olivier Brunat
 
