@@ -33,7 +33,7 @@ public class MethodeFermat {
      */
     public static void factorisation(long n){
         long r = (int) Math.floor(Math.sqrt(n)) + 1;
-        long x = r * r - n;
+        long s = r * r - n;
         while(true){
             if(Math.sqrt(x) == Math.floor(Math.sqrt(x))){
                 long a = r + (long) Math.sqrt(x);
