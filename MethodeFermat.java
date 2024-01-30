@@ -10,16 +10,17 @@ public class MethodeFermat {
      * @param n Entier dont on veut tester la primalité.
      * @return Si le test renvoie faux, l'entier n est composé. S'il renvoie vrai, l'entier est premier avec une probabilité de 1 - 1/2^10
      */
-    public static boolean primaliteFermat(int n){
+    public static boolean primaliteFermat(long n){
+        Long ln = Long.valueOf(n);
         Random random = new Random();
         BigInteger bigN = BigInteger.valueOf(n);
         ArrayList<Integer> entiersTest = new ArrayList<Integer>();
         for(int i = 0; i < 10; ++i){
-            int randInt =  random.nextInt(n - 2) + 2;
+            int randInt =  random.nextInt(ln.intValue() - 2) + 2;
             entiersTest.add(randInt);
         }
         for(int i = 0; i < 10; ++i){
-            BigInteger a = BigInteger.valueOf(entiersTest.get(i)).pow(n - 1).mod(bigN); // Soit xi l'élément d'indice i de entiersTest, a = xi ^ (n - 1) mod n
+            BigInteger a = BigInteger.valueOf(entiersTest.get(i)).pow(ln.intValue() - 1).mod(bigN); // Soit xi l'élément d'indice i de entiersTest, a = xi ^ (n - 1) mod n
             if(!a.equals(BigInteger.valueOf(1))){
                 return false;
             }
@@ -32,17 +33,28 @@ public class MethodeFermat {
      * @param n entier composé impair à factoriser
      */
     public static void factorisation(long n){
-        long r = (int) Math.floor(Math.sqrt(n)) + 1;
-        long x = r * r - n;
-        while(true){
-            if(Math.sqrt(x) == Math.floor(Math.sqrt(x))){
-                long a = r + (long) Math.sqrt(x);
-                long b = r - (long) Math.sqrt(x);
-                System.out.println(n + " = " + a + " x " + b);
-                break;
+        if(n <= 2 || primaliteFermat(n)){
+            System.out.print(n);
+        }
+        else if(n % 2 == 1){
+            long r = (int) Math.floor(Math.sqrt(n)) + 1;
+            long s = r * r - n;
+            while(true){
+                if(Math.sqrt(s) == Math.floor(Math.sqrt(s))){
+                    long a = r + (long) Math.sqrt(s);
+                    long b = r - (long) Math.sqrt(s);
+                    factorisation(a);
+                    System.out.print(" x ");
+                    factorisation(b);
+                    break;
+                }
+                r++;
+                s = r * r - n;
             }
-            r++;
-            x = x + 2 * r - 1;
+        }
+        else{
+            System.out.print("2 x ");
+            factorisation(n/2);
         }
     }
 
@@ -50,12 +62,9 @@ public class MethodeFermat {
         if(args.length != 1){
             System.out.println("Donnez un nombre impair à factoriser s'il vous plaît.");
         }else{
-            if(Integer.valueOf(args[0]) % 2 == 0){
-                System.out.println("Donnez un nombre impair à factoriser s'il vous plaît.");
-            }
-            else{
-                factorisation(Integer.valueOf(args[0]));
-            }
+            System.out.print(Integer.valueOf(args[0]) + " = ");
+            factorisation(Long.valueOf(args[0]));
+            System.out.println();
         }
     }
 
