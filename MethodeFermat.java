@@ -72,7 +72,7 @@ public class MethodeFermat {
 
     public static void main(String[] args){
         if(args.length != 1){
-            System.out.println("Donnez un nombre impair à factoriser s'il vous plaît.");
+            System.out.println("Donnez un nombre à factoriser s'il vous plaît.");
         }else{
             System.out.print(Integer.valueOf(args[0]) + " = ");
             factorisation(Long.valueOf(args[0]), 0);
