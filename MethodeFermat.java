@@ -29,8 +29,9 @@ public class MethodeFermat {
     }
     
     /**
-     * Méthode de factorisation de Fermat. Fonctionne avec des entiers composés impairs. On peut tester la primalité de n avec la méthode primaliteFermat mais elle réduit énormément l'efficacité pour les grands entiers
+     * Méthode de factorisation de Fermat. Basées sur le fait qu'un entier peut s'écrire comme différence de deux carrés.
      * @param n entier composé impair à factoriser
+     * @param puissance puissance de 2 à afficher
      */
     public static void factorisation(long n, int puissance){
         if(n % 2 == 0 && n > 0){
