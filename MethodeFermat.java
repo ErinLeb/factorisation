@@ -32,8 +32,17 @@ public class MethodeFermat {
      * Méthode de factorisation de Fermat. Fonctionne avec des entiers composés impairs. On peut tester la primalité de n avec la méthode primaliteFermat mais elle réduit énormément l'efficacité pour les grands entiers
      * @param n entier composé impair à factoriser
      */
-    public static void factorisation(long n){
-        if(n <= 2 || primaliteFermat(n)){
+    public static void factorisation(long n, int puissance){
+        if(n % 2 == 0 && n > 0){
+            factorisation(n/2, puissance + 1);
+        }
+        else if(puissance == 1){
+            System.out.print("2 x ");
+        }
+        else if(puissance > 1){
+            System.out.print("2^" + puissance + " x ");
+        }
+        if(n < 2 || primaliteFermat(n)){
             System.out.print(n);
         }
         else if(n % 2 == 1){
@@ -49,18 +58,14 @@ public class MethodeFermat {
                 if(Math.sqrt(s) == Math.floor(Math.sqrt(s))){
                     long a = r + (long) Math.sqrt(s);
                     long b = r - (long) Math.sqrt(s);
-                    factorisation(a);
+                    factorisation(a, 0);
                     System.out.print(" x ");
-                    factorisation(b);
+                    factorisation(b, 0);
                     break;
                 }
                 r++;
                 s = r * r - n;
             }
-        }
-        else{
-            System.out.print("2 x ");
-            factorisation(n/2);
         }
     }
 
@@ -69,7 +74,7 @@ public class MethodeFermat {
             System.out.println("Donnez un nombre impair à factoriser s'il vous plaît.");
         }else{
             System.out.print(Integer.valueOf(args[0]) + " = ");
-            factorisation(Long.valueOf(args[0]));
+            factorisation(Long.valueOf(args[0]), 0);
             System.out.println();
         }
     }
