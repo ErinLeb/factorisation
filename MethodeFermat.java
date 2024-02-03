@@ -47,7 +47,7 @@ public class MethodeFermat {
             System.out.print(n);
         }
         else if(n % 2 == 1){
-            long r = (int) Math.sqrt(n);
+            long r = (int) Math.floor(Math.sqrt(n));
             long s = r * r - n;
             while(true){
                 if(Math.sqrt(s) == Math.floor(Math.sqrt(s))){
