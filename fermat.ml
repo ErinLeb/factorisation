@@ -1,3 +1,4 @@
+(* Factorise l'entier impair n avec la méthode de Fermat *)
 let rec factorisation_fermat n r s fact =
     if r = n then n::fact
     else if Float.is_integer (Float.sqrt (Int.to_float s)) then 
