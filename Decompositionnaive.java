@@ -1,73 +1,62 @@
 import java.lang.Math;
 import java.util.ArrayList;
 
+
 public class Decompositionnaive{
-    static final int[] DiviseursPremiers = new int[]{2,3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,73, 79, 83, 89, 97};
 
-    public static boolean est_premier(int x){
-        assert(x <= 10000);
+    public static void affichage(long x, ArrayList<Long> diviseurs){
+        if(diviseurs.isEmpty()){
+            System.out.println(x + " est premier.");
+            return;
+        }
         
-        for(int i = 0; i < DiviseursPremiers.length; i++){
-            if(DiviseursPremiers[i] > (int) Math.floor(Math.sqrt(x))){
-                break;
-            }
-            if(x%DiviseursPremiers[i] == 0){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static void factorisation(int x){
-        if(x > 10000){
-            System.out.println("Nombre trop grand");
-            return;
-        }
-
-        if(est_premier(x)){
-            System.out.println("Ce nombre est premier.");
-            System.out.println(x + " = 1 x " + x);
-            return;
-        }
-
-        ArrayList<Integer> diviseurs = new ArrayList<Integer>();
-        int pi = 0; //indice du plus petit diviseur 
-        int reste = x;
-        while(reste > 1){
-            for(int j = pi; j < DiviseursPremiers.length; j++){ //on commence au plus petit diviseur
-                if(reste%DiviseursPremiers[j] == 0){
-                    diviseurs.add(DiviseursPremiers[j]);
-                    reste = reste/DiviseursPremiers[j];
-                    pi = j;
-                    break;
-                }
-            }
-            if(est_premier(reste)){
-                diviseurs.add(reste);
-                reste = 1;
-                break;
-            }
-        }
-
-        if(reste != 1){
-            return;
-        }
-
-        System.out.print(x + " = ");
-        for(int j = 0; j < diviseurs.size(); j++){
-            System.out.print(diviseurs.get(j));
-            if(j != diviseurs.size() - 1){
+        System.out.print(x + " = " );
+        for(int i = 0; i < diviseurs.size(); i++){
+            System.out.print(diviseurs.get(i));
+            if(i != diviseurs.size()-1){
                 System.out.print(" x ");
+            }else{
+                System.out.println();
             }
         }
-        System.out.println();
+    }
+        
+    //implémenter la méthode avec une liste n'a un intérêt que si on implémente la suppression
+    //des multiples, or en java, une suppression dans une liste se fait en temps linéaire, donc 
+    //complexité linéaire quadratique 
+
+        
+
+    public static void factorisation_it(long x){
+        long k = 2;
+        ArrayList<Long> diviseurs = new ArrayList<Long>();
+
+        //au lieu de calculer la racine, vérifier si (k+1)² dépasse x 
+        //pour les grands entiers : BigInteger
+
+        long q = x;
+        int r = (int)Math.sqrt(x);
+        while(k <= r && q > 1){
+            if(q % k == 0){
+                q = q/k;
+                r = (int)Math.sqrt(q);
+                diviseurs.add(k);
+            }else{
+                k++;
+            }
+        }
+        if(q > 1){
+            diviseurs.add(q);
+        }
+
+        affichage(x, diviseurs);
+        
     }
 
     public static void main(String[] args) {
-        if(args.length != 1){
-            System.out.println("Donnez un nombre à factoriser plus petit que 10 000 s'il vous plaît.");
-        }else{
-            factorisation(Integer.valueOf(args[0]));
-        }
+        factorisation_it(9);
+        factorisation_it(15);
+        factorisation_it(19);
+        factorisation_it(1999);
     }
 }
