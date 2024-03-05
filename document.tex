@@ -45,7 +45,7 @@
 		
 		Le plus petit diviseur de $\mathit{N}$ ne dépasse pas $\sqrt{N}$.
 		
-		En effet, prenons p le plus petit diviseur de $\mathit{N}$. Alors $\mathit{N = p}$ $\times$ $\mathit{q}$  avec q un entier (p <= q par minimalité de p). On a $\mathit{p² <= p}$ $\times$ $\mathit{q = N}$ donc $\mathit{p <= }$$\sqrt{N}$. 
+		En effet, prenons $p$ le plus petit diviseur de $\mathit{N}$. Alors $\mathit{N = p}$ $\times$ $\mathit{q}$  avec $q$ un entier ($\mathit{p \leq q}$ par minimalité de $p$). On a $\mathit{p² \leq p}$ $\times$ $\mathit{q = N}$ donc $\mathit{p \leq }$$\sqrt{N}$. 
 		
 		\subparagraph{Critère de finitude}	
 		
@@ -59,7 +59,7 @@
 	\begin{itemize}	
 		\item On peut effectuer l'algorithme sur les $\mathit{p-1}$ diviseurs plus petits de $\mathit{N}$ (avec $\mathit{p}$ le nombre de facteurs premiers dans la factorisation de $\mathit{N}$) et ajouter le dernier quotient (qui est un entier premier) ce qui permet de ne tester que les entiers qui ne dépassent pas la racine du quotient à chaque itération.
 		
-		Si N = $p_1$ $\times$ ... $\times$ $p_q$ avec $p_1$ $\leq$ ... $\leq$ $p_q$ premiers, pour i $\in$ \{1, ..., q-1\}, $p_i$ est le plus petit diviseur premier de l = $p_i$ $\times$ .... $\times$ $p_q$ donc $p_i$ ne dépasse pas $\sqrt(l)$.
+		Si $N$ = $p_1$ $\times$ ... $\times$ $p_q$ avec $p_1$ $\leq$ ... $\leq$ $p_q$ premiers, pour $i$ $\in$ \{1, ..., q-1\}, $p_i$ est le plus petit diviseur premier de $l$ = $p_i$ $\times$ .... $\times$ $p_q$ donc $p_i$ ne dépasse pas $\sqrt(l)$.
 		
 		\item Si $\mathit{d|N}$, il faut ajouter $\mathit{d}$ aux diviseurs et continuer l'algorithme sur le quotient de la division. Si $\mathit{d \nmid N}$, on sait que tous ses multiples ne divisent pas $\mathit{N}$ non plus. Si on teste chaque diviseur, le nombre de division est linéaire. Ainsi, pour de très grands nombres, il pourrait être intéressant de ne pas faire de divisions inutiles. Ici, si on a une liste des entiers premiers à tester, on pourrait donc retirer ces multiples. Pour avoir une réelle optimisation, il faudrait faire attention à la suppression de ces valeurs de la liste. En effet, si on ne fait pas cette opération avec une complexité en temps constant, on ne gagne rien, voire on fait plus d'opérations que si on laissait les divisions inutiles. 
 		
