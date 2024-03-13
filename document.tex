@@ -88,31 +88,31 @@
 		
 		\item 	Un entier se décompose comme $2^{k}N$ avec $\mathit{k}$ $\in\mathbb{N}$, $\mathit{N}$ un entier impair. Si $\mathit{N}$ est premier, on a donc la décomposition en facteurs premiers, sinon, $\mathit{N}$ s'exprime comme une différence de carrés.
 		
-		\item Soit $\mathit{p}$, $\mathit{q}$ $\in\mathbb{N}$, $\mathit{pq = }$ $\frac{(p+q)²}{2} - \frac{(p-q)²}{2}$
+		\item Soit $\mathit{p}$, $\mathit{q}$ $\in\mathbb{N}$, $\mathit{pq = }$ $\mathit{\left( \frac{p+q}{2} \right) ^2 - \left( \frac{p-q}{2} \right) ^2}$
 	\end{itemize}
 		
 	
 		\subparagraph{Méthode}
 	On sait qu'un entier est décomposable comme $2^{k}N$, avec $\mathit{N}$ un entier impair. Si $\mathit{N}$ est premier, on a déjà la décomposition en facteurs premiers qui nous intéresse. Sinon, nous allons décomposer $\mathit{N}$ en produit de deux facteurs impairs (auxquels on appliquera la même procédure s'ils ne sont pas premiers). 
 	
-	On veut trouver $\mathit{S}$ et $\mathit{R}$ tel que N = R² - S² = (S+R)(S-R). 
-	Pour cela, on commence avec c = $\lfloor \sqrt(N)\rfloor$ et on va y ajouter $\mathit{k}$ $\in\mathbb{N}$ de plus en plus grand, jusqu'à trouver un S² convenable. En effet, on pose R = c + k (R est forcément plus grand que N) pour avoir
+	On veut trouver $\mathit{S}$ et $\mathit{R}$ tel que $\mathit{N = R^2 - S^2 = (S+R)(S-R)}$
+	Pour cela, on commence par poser $\mathit{c = \lfloor \sqrt(N)\rfloor}$ et on va y ajouter $\mathit{k}$ $\in\mathbb{N}$ de plus en plus grand, jusqu'à trouver un $\mathit{S^2}$ convenable. En effet, on pose $\mathit{R = c + k}$ ($\mathit{R}$ est forcément plus grand que $\mathit{\sqrt{N}}$) pour avoir
 	 $\mathit{S^{2} = N - R^{2} = N - (c+k)^{2}}$.
-	 Un S² convenable est donc tel que S est un entier. Une fois S et R trouvés, on pourra donc écrire N = (S+R)(S-R)
+	 Un $\mathit{S^2}$ convenable est donc tel que $\mathit{S} \in \mathbb{N}$. Une fois $\mathit{S}$ et $\mathit{R}$ trouvés, on pourra donc écrire $\mathit{N = (S+R)(S-R)}$
 		\subparagraph{Exemple}
 	Factorisons 15 par la méthode de Fermat. (On sait que 15 = 3 $\times$  5)
 	
-	15 étant impair, on a 15 = 2$^{0}$N avec N = 15
+	15 étant impair, on a $\mathit{15 = 2^{0}N}$ avec $\mathit{N = 15}$
 	
-	c = $\lfloor \sqrt(15)\rfloor$ = 3
+	$\mathit{c = \lfloor \sqrt(15)\rfloor = 3}$
 	
-	Si on prend R = c + 0 = 3, R² = 9 et S² = N - R² = 16 - 9 = 7. Or $\sqrt{7}$ n'est pas un entier. 
+	Si on prend $\mathit{R = c + 0 = 3}$, alors $\mathit{R^2 = 9}$ et $\mathit{S^2 = N - R^2 = 16 - 9 = 7}$. Or $\sqrt{7}$ n'est pas un entier. 
 	
-	On continue avec R = c + 1 = 4. On a R² = 16 et S² = N - R² = 16 - 15 = 1.
+	On continue avec $\mathit{R = c + 1 = 4}$. On a $\mathit{R^2 = 16}$ et $\mathit{S² = N - R² = 16 - 15 = 1}$.
 	
-	On a donc S = 1 qui est $\sqrt(1)$
+	On a donc $\mathit{S = 1}$ qui est $\sqrt(1)$
 	
-	On retrouve bien N = (R+S)(R-S) = (4+1) $\times$  (4-1) = 5 $\times$ 3
+	On retrouve bien $\mathit{N = (R+S)(R-S) = (4+1) \times  (4-1) = 5 \times 3}$
 	\newpage
 	
 	
