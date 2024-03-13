@@ -45,7 +45,7 @@
 		
 		Le plus petit diviseur de $\mathit{N}$ ne dépasse pas $\sqrt{N}$.
 		
-		En effet, prenons p le plus petit diviseur de $\mathit{N}$. Alors $\mathit{N = p}$ $\times$ $\mathit{q}$  avec q un entier (p <= q par minimalité de p). On a $\mathit{p² <= p}$ $\times$ $\mathit{q = N}$ donc $\mathit{p <= }$$\sqrt{N}$. 
+		En effet, prenons $p$ le plus petit diviseur de $\mathit{N}$. Alors $\mathit{N = p}$ $\times$ $\mathit{q}$  avec $q$ un entier ($\mathit{p \leq q}$ par minimalité de $p$). On a $\mathit{p² \leq p}$ $\times$ $\mathit{q = N}$ donc $\mathit{p \leq }$$\sqrt{N}$. 
 		
 		\subparagraph{Critère de finitude}	
 		
@@ -59,7 +59,7 @@
 	\begin{itemize}	
 		\item On peut effectuer l'algorithme sur les $\mathit{p-1}$ diviseurs plus petits de $\mathit{N}$ (avec $\mathit{p}$ le nombre de facteurs premiers dans la factorisation de $\mathit{N}$) et ajouter le dernier quotient (qui est un entier premier) ce qui permet de ne tester que les entiers qui ne dépassent pas la racine du quotient à chaque itération.
 		
-		Si N = $p_1$ $\times$ ... $\times$ $p_q$ avec $p_1$ $\leq$ ... $\leq$ $p_q$ premiers, pour i $\in$ \{1, ..., q-1\}, $p_i$ est le plus petit diviseur premier de l = $p_i$ $\times$ .... $\times$ $p_q$ donc $p_i$ ne dépasse pas $\sqrt(l)$.
+		Si $N$ = $p_1$ $\times$ ... $\times$ $p_q$ avec $p_1$ $\leq$ ... $\leq$ $p_q$ premiers, pour $i$ $\in$ \{1, ..., q-1\}, $p_i$ est le plus petit diviseur premier de $l$ = $p_i$ $\times$ .... $\times$ $p_q$ donc $p_i$ ne dépasse pas $\sqrt(l)$.
 		
 		\item Si $\mathit{d|N}$, il faut ajouter $\mathit{d}$ aux diviseurs et continuer l'algorithme sur le quotient de la division. Si $\mathit{d \nmid N}$, on sait que tous ses multiples ne divisent pas $\mathit{N}$ non plus. Si on teste chaque diviseur, le nombre de division est linéaire. Ainsi, pour de très grands nombres, il pourrait être intéressant de ne pas faire de divisions inutiles. Ici, si on a une liste des entiers premiers à tester, on pourrait donc retirer ces multiples. Pour avoir une réelle optimisation, il faudrait faire attention à la suppression de ces valeurs de la liste. En effet, si on ne fait pas cette opération avec une complexité en temps constant, on ne gagne rien, voire on fait plus d'opérations que si on laissait les divisions inutiles. 
 		
@@ -88,31 +88,31 @@
 		
 		\item 	Un entier se décompose comme $2^{k}N$ avec $\mathit{k}$ $\in\mathbb{N}$, $\mathit{N}$ un entier impair. Si $\mathit{N}$ est premier, on a donc la décomposition en facteurs premiers, sinon, $\mathit{N}$ s'exprime comme une différence de carrés.
 		
-		\item Soit $\mathit{p}$, $\mathit{q}$ $\in\mathbb{N}$, $\mathit{pq = }$ $\frac{(p+q)²}{2} - \frac{(p-q)²}{2}$
+		\item Soit $\mathit{p}$, $\mathit{q}$ $\in\mathbb{N}$, $\mathit{pq = }$ $\mathit{\left( \frac{p+q}{2} \right) ^2 - \left( \frac{p-q}{2} \right) ^2}$
 	\end{itemize}
 		
 	
 		\subparagraph{Méthode}
 	On sait qu'un entier est décomposable comme $2^{k}N$, avec $\mathit{N}$ un entier impair. Si $\mathit{N}$ est premier, on a déjà la décomposition en facteurs premiers qui nous intéresse. Sinon, nous allons décomposer $\mathit{N}$ en produit de deux facteurs impairs (auxquels on appliquera la même procédure s'ils ne sont pas premiers). 
 	
-	On veut trouver $\mathit{S}$ et $\mathit{R}$ tel que N = R² - S² = (S+R)(S-R). 
-	Pour cela, on commence avec c = $\lfloor \sqrt(N)\rfloor$ et on va y ajouter $\mathit{k}$ $\in\mathbb{N}$ de plus en plus grand, jusqu'à trouver un S² convenable. En effet, on pose R = c + k (R est forcément plus grand que N) pour avoir
+	On veut trouver $\mathit{S}$ et $\mathit{R}$ tel que $\mathit{N = R^2 - S^2 = (S+R)(S-R)}$
+	Pour cela, on commence par poser $\mathit{c = \lfloor \sqrt(N)\rfloor}$ et on va y ajouter $\mathit{k}$ $\in\mathbb{N}$ de plus en plus grand, jusqu'à trouver un $\mathit{S^2}$ convenable. En effet, on pose $\mathit{R = c + k}$ ($\mathit{R}$ est forcément plus grand que $\mathit{\sqrt{N}}$) pour avoir
 	 $\mathit{S^{2} = N - R^{2} = N - (c+k)^{2}}$.
-	 Un S² convenable est donc tel que S est un entier. Une fois S et R trouvés, on pourra donc écrire N = (S+R)(S-R)
+	 Un $\mathit{S^2}$ convenable est donc tel que $\mathit{S} \in \mathbb{N}$. Une fois $\mathit{S}$ et $\mathit{R}$ trouvés, on pourra donc écrire $\mathit{N = (S+R)(S-R)}$
 		\subparagraph{Exemple}
 	Factorisons 15 par la méthode de Fermat. (On sait que 15 = 3 $\times$  5)
 	
-	15 étant impair, on a 15 = 2$^{0}$N avec N = 15
+	15 étant impair, on a $\mathit{15 = 2^{0}N}$ avec $\mathit{N = 15}$
 	
-	c = $\lfloor \sqrt(15)\rfloor$ = 3
+	$\mathit{c = \lfloor \sqrt(15)\rfloor = 3}$
 	
-	Si on prend R = c + 0 = 3, R² = 9 et S² = N - R² = 16 - 9 = 7. Or $\sqrt{7}$ n'est pas un entier. 
+	Si on prend $\mathit{R = c + 0 = 3}$, alors $\mathit{R^2 = 9}$ et $\mathit{S^2 = N - R^2 = 16 - 9 = 7}$. Or $\sqrt{7}$ n'est pas un entier. 
 	
-	On continue avec R = c + 1 = 4. On a R² = 16 et S² = N - R² = 16 - 15 = 1.
+	On continue avec $\mathit{R = c + 1 = 4}$. On a $\mathit{R^2 = 16}$ et $\mathit{S² = N - R² = 16 - 15 = 1}$.
 	
-	On a donc S = 1 qui est $\sqrt(1)$
+	On a donc $\mathit{S = 1}$ qui est $\sqrt(1)$
 	
-	On retrouve bien N = (R+S)(R-S) = (4+1) $\times$  (4-1) = 5 $\times$ 3
+	On retrouve bien $\mathit{N = (R+S)(R-S) = (4+1) \times  (4-1) = 5 \times 3}$
 	\newpage
 	
 	
