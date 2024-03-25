@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 public class friable{
 	
+	/**
+	 * Fonction renvoyant la liste des entiers inférieurs ou égaux à la borne b-friables avec la méthode du cribles quadratique.
+	 * @param borne borne jusqu'à laquelle on teste la b-friabilité des entiers.
+	 * @param b valeur pour laquelle on teste si les entiers n'ont que des facteurs premiers inférieur ou égaux.
+	 * @return la liste des entiers b-friables inférieurs ou égaux à la @param borne (Les entiers dont les diviseurs premiers sont <= @param b).
+	 */
 	public static ArrayList<Integer> cribleQuadratique(int borne, int b){
 		if(borne <= 1 || b <= 1){
 			System.out.println("Veuillez entrer une borne et un entier B supérieurs à 1.");
