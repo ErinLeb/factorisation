@@ -9,7 +9,7 @@ public class Friable{
 	 * @return la liste des entiers b-friables inférieurs ou égaux à la @param borne (Les entiers dont les diviseurs premiers sont <= @param b).
 	 */
 	public static ArrayList<Integer> cribleQuadratique(int borne, int b){
-		if(borne <= 1 || b < 1){
+		if(borne <= 1 || b <= 1){
 			System.out.println("Veuillez entrer une borne et un entier B supérieurs à 1.");
 			return null;
 		}
@@ -19,7 +19,7 @@ public class Friable{
 			entiers[i] = i+1;
 		}
 		for(int i = 2; i <= b; i++){
-			for(int j = i - 1; j < entiers.length; j+=i){
+			for(int j = i - 1; j < entiers.length; j += i){
 				while(entiers[j] % i == 0){
 					entiers[j] /= i;
 				}
