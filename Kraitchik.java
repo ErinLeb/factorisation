@@ -200,11 +200,11 @@ public class Kraitchik{
 	}
 
 	/**
-	 * "échelonne" une matrice selon la méthode du pivot de Gauss jusqu'à ce qu'on obtienne une ligne nulle.
+	 * Détermine un vecteur du noyau de la matrice transposée de @param M selon la méthode du pivot de Gauss.
 	 * La matrice n'est pas à proprement parler échelonnée car on effectue pas d'opération d'échange de ligne
 	 * @param M matrice à échelonner
 	 * @param historique historique d'opérations initial des lignes de la matrice
-	 * @return renvoie la liste des opérations effectuées pour obtenir une ligne nulle
+	 * @return renvoie la liste des opérations effectuées pour obtenir un vecteur du noyau
 	 */
 	public static ArrayList<Integer> pivotGauss(ArrayList<ArrayList<Integer>> M, ArrayList<ArrayList<Integer>> historique){
 		int colonePivot = 0;
@@ -302,23 +302,15 @@ public class Kraitchik{
 
 
 	public static void main(String[] args){
-		/* 
-		if(args.length != 2){
-			System.out.println("Le programme attend en premier une borne jusqu'à laquelle tester la B-friablilité des entiers et en second un entier B.");
+		if(args.length != 3){
+			System.out.println("Le programme attend en premier un entier n impair à factoriser, en duxième une borne B de friabilité et enfin le nombre de nombres premiers inférieurs ou égaux à B.");
 			return;
 		}
-		int borne = Integer.valueOf(args[0]);
+		int n = Integer.valueOf(args[0]);
 		int b = Integer.valueOf(args[1]);
-		ArrayList<Integer> bfriables = cribleQuadratique(borne, b);
-		for(int i = 0; i < bfriables.size(); i++){
-			System.out.println(bfriables.get(i) + " est " + b + " friable");
-		}
-
-		System.out.println("10 est il 5-friable ? " + friable(10,5));
-		System.out.println("10 est il 3-friable ? " + friable(10,3));
-		*/
-		ArrayList<Integer> facteurs = factoKraitchik(2041, 7, 4);
-		System.out.print("2041 = ");
+		int piB = Integer.valueOf(args[2]);
+		ArrayList<Integer> facteurs = factoKraitchik(n, b, piB);
+		System.out.print(n + " = ");
 		for(int i = 0; i < facteurs.size() - 1; i++){
 			System.out.print(facteurs.get(i) + " x ");
 		}
