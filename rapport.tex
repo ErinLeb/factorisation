@@ -5,7 +5,6 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage[left= 1.5cm, right = 2cm]{geometry}
 
 \begin{document}
 	
@@ -110,9 +109,9 @@
 	
 	Si on prend $\mathit{R = c + 0 = 3}$, alors $\mathit{R^2 = 9}$ et $\mathit{S^2 = N - R^2 = 16 - 9 = 7}$. Or $\sqrt{7}$ n'est pas un entier. 
 	
-	On continue avec $\mathit{R = c + 1 = 4}$. On a $\mathit{R^2 = 16}$ et $\mathit{S² = N - R² = 16 - 15 = 1}$.
+	On continue avec $\mathit{R = c + 1 = 4}$. On a $\mathit{R^2 = 16}$ et $\mathit{S^2 = N - R^2 = 16 - 15 = 1}$.
 	
-	On a donc $\mathit{S = 1}$ qui est $\sqrt(1)$
+	On a donc $\mathit{S = 1}$ qui est $\sqrt 1$
 	
 	On retrouve bien $\mathit{N = (R+S)(R-S) = (4+1) \times (4-1) = 5 \times 3}$
 	
@@ -123,8 +122,93 @@
 	
 	\section{\LARGE{Méthode de Kraitchik}}
 	
+	\paragraph{Principe}
+	Pour factoriser un entier $N$ impair, nous allons utiliser le principe suivant : on identifie $u$ et $v$ des entiers tels que :
+	\begin{itemize}
+		\item $N \mid(u+v)(u-v) \iff u^2 \equiv v^2 [N]$
+		\item $N \nmid(u+v)$ et $ N \nmid(u-v) \iff u \not\equiv \pm v [N]$ 
+	\end{itemize}
+	
+	On obtient ainsi :
+	$$N = pgcd(u+v) \times pgcd(u-v)$$
+	
+	Pour trouver de tels $u$ et $v$, nous considérons le polynôme de Kraitchik : $Q(X) = X^2 - N  \in \mathbb{Z}[X]$.
+	
+	(*) Prenons une famille d'entiers $(x_i)_{i \in I}$ tel que $\forall i \in I, \prod_{i \in I} Q(x_i) = v^2, v \in \mathbb{N}$. On pose $\prod_{i \in I}x_i^2 = u^2$.
+	
+	 Alors on a : 
+	
+		$$\prod_{i \in I} x_i^2 \equiv \prod_{i \in I} Q(x_i) [N]$$
+		
+	On admet qu'il y a une grande possibilité que $u \not\equiv v [N]$.	
+	Il suffit donc de trouver une telle famille $(x_i)_{i \in I}$.
+	
+	\paragraph{Exemple}
+	Factorisons $N = 2041$ avec cette méthode.
+	
+	Le produit des polynômes de Kraitchik doit être un carré donc positif. Ainsi, on regarde les carrés plus grands que 2041 pour constituer notre famille.
+	Comme $\lfloor \sqrt{2041} \rfloor = 45$, regardons 
+	$$ x_1 = 46,  x_2 = 47, x_3 = 48$$ $$x_4 = 49, x_5 = 50, x_6 = 51$$
+	On a 
+	$$ Q(x_1) = 3 \times 5^2, Q(x_2) = 2^3 \times 3 \times 7, Q(x_3) = 263,$$
+	$$ Q(x_4) = 2^3 \times 3^2 \times 5, Q(x_5) = 3^3 \times 17, Q(x_6) = 2^4 \times 5 \times 7$$
+	On remarque que $Q(x_1) \times Q(x_2) \times Q(x_4) \times Q(x_6)$ est un carré (toutes les puissances de nombres premiers sont paires). On pose donc 
+	$$u = 46 \times 47 \times 49 \times 51$$ $$v = 2^5 \times 3^2 \times 5^2 \times 7$$
+	
+	En calculant $pgcd(u+v, N) = 157$ et $pgcd(u-v, N) = 13$, on obtient donc $N = 13 \times 157$.
+	
+	\paragraph{Trouver ce qui nous intéresse}
+	Nous allons montrer qu'il est toujours possible de trouver une famille $(x_i)_{i \in I}$ telle que $\prod_{i \in I} Q(x_i)$ soit un carré grâce à l'algèbre linéaire.
+
+	\subparagraph{Lemme}
+		Soit $k$, $B \in \mathbb{N}$ tel que $k \ge \pi(B) + 1$, $(m_1, ..., m_k)$ des entiers naturels B-friables,
+		il existe $I \subset \{1, ..., k\}$ tel que $\prod_{i \in I} m_i$ est un carré.
+		
+	\subparagraph{Démonstration}
+	Soit $B \in \mathbb{N}$, $x_i \in \mathbb{N}, x_i \ge \lfloor \sqrt{N} \rfloor +1$. Fixons 
+	$$r \in \mathbb{N}, r = \pi(B)$$
+	$$p_1, ..., p_r \text{ les nombres premiers } \le B$$
+	$$a_1, ..., a_m , (m>r) \text{ B-friables}$$
+	
+	$\forall i \in \{1, ..., k\}$, on note $a_i = \prod_{j=1}^r p_j^{\alpha_{i,j}}, \alpha_{i,j} \ge 0$ (par hypothèse, tous les $a_i$ peuvent bien s'écrire sous cette forme puisqu'ils sont B-friables.)
+	
+	On observe que 
+	\begin{eqnarray*}
+		\prod_{i=1}^m a_i \text{ est un carré }  &\iff& \prod_{i=1}^m \prod_{j=1}^r p_j^{\alpha_{i,j}} \text{ est un carré} \\
+		&\iff& \prod_{j=1}^r p_j^{\sum_{i=1}^m \alpha_{i,j}} \text{ est un carré } \\
+		&\iff& \sum_{i=1}^m \alpha_{i,j} \text{ est pair } \forall j \in \{1, ..., m\}
+	\end{eqnarray*}
+	
+	On pose $M$ la matrice dans $\mathbb{F}_2$ de taille $(m,r)$ avec aux coordonnées $(i,j)$,  $\alpha_{i,j}$ modulo 2. 
+	Comme $rg(M) \le r < m$, les vecteurs lignes forment un système lié, donc il existe $I \subset \{1, ..., m\}$ tel que $\sum_{i \in I} l_i = 0$ et donc il existe une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. 
+	
+	Si on pose $\lambda_i = 1 \iff a_i \in I$, chaque vecteur de $\mathbb{F}_2^{m}$  du noyau de l'application linéaire dont la matrice est la transposée de M permet d'obtenir une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. Notons que le noyau est non nul par le théorème du rang.
+	
+	
+	Ainsi, on a montré qu'en prenant suffisamment d'éléments $a_i$ B-friables, c'est à dire pour que la matrice M ne soit pas carrée, il existe forcément une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré.
+	
+	
+	\subparagraph{En pratique}
+	Pour factoriser N (supposant qu'il ne s'agit pas d'une puissance d'un nombre premier), on prend donc : 
+	$$(x_i)_{i \in I} \text{ avec } \forall i \in I, x_i \in \mathbb{N}, x_i > \lfloor \sqrt{N} \rfloor$$
+	$$ (a_i)_{i \in I}, \forall i \in I a_i = Q(x_i) = x_i^2 - N$$
+	
+	\subparagraph{Exemple}
+	Reprenons l'exemple précédent avec $N = 2041$.
+ 
+ 	\subparagraph{Choisir B}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	\newpage
-	\section{\Large{Références}}
+	\section{\LARGE{Références}}
 	Nous nous sommes largement appuyés sur \textsc{Chapitre VI - Méthodes de factorisation} du cours de Cryptographie d'\textsc{Alain Kraus} en 2009-2010 à l'Université Pierre et Marie Curie. Nous avons également pu avoir des précisions, notamment sur l'aspect algébrique des méthodes présentées, de la part de notre encadrant de projet \textsc{Olivier Brunat}, enseignant chercheur de l'IMJ-PRG à l'Université Paris Cité.
 	
 	Voici une liste de ressources que nous avons consulté dans une moindre mesure : 
