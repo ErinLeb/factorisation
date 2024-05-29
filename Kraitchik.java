@@ -6,8 +6,8 @@ public class Kraitchik{
 	/**
 	 * Fonction renvoyant la liste des entiers inférieurs ou égaux à la borne et b-friables 
 	 * avec la méthode du crible quadratique.
-	 * @param borne borne jusqu'à laquelle on teste la b-friabilité des entiers.
-	 * @param b valeur pour laquelle on teste si les entiers n'ont que des diviseurs premiers inférieurs ou égaux.
+	 * @param borne  jusqu'à laquelle on teste la b-friabilité des entiers.
+	 * @param b valeur pour laquelle on teste si les entiers n'ont que des diviseurs premiers lui étant inférieurs ou égaux.
 	 * @return la liste des entiers b-friables inférieurs ou égaux à la @param borne (Les entiers dont les diviseurs premiers sont <= @param b).
 	 */
 	public static ArrayList<Integer> cribleQuadratique(int borne, int b){
@@ -38,7 +38,7 @@ public class Kraitchik{
 	/**
 	 * Fonction testant si un entier @param n est @param b friable.
 	 * @param n entier dont on veut tester la friabilité.
-	 * @param b valeur pour laquelle on teste si @param n n'a que des diviseurs premiers inférieurs ou égaux.
+	 * @param b valeur pour laquelle on teste si @param n n'a que des diviseurs premiers lui étant inférieurs ou égaux.
 	 * @return true si @param n est @param b friable, false sinon.
 	 */
 	public static boolean friable(int n, int b){
@@ -96,7 +96,7 @@ public class Kraitchik{
 
 	/**
 	 * Construit une liste représentant la factorisation en 
-	 * nombre premiers inférieurs ou égaux à @param premier.get(premier.size()-1) de @param n
+	 * nombre premiers inférieurs ou égaux à @param premiers.get(premiers.size()-1) de @param n
 	 * dans F2
 	 * @param n Nombre @param premier.get(premier.size()-1) friable à factoriser
 	 * @param premiers Liste des nombres premiers inférieurs ou égaux à une certaine borne
@@ -119,7 +119,7 @@ public class Kraitchik{
 	}
 
 	/**
-	 * Calcule de pgcd de @param m et @param n
+	 * Calcule le pgcd de @param m et @param n
 	 * @param m
 	 * @param n
 	 * @return pgcd de @param m et @param n
@@ -127,7 +127,7 @@ public class Kraitchik{
 	public static int pgcd(int m, int n) {
 		int r;
 		while (n != 0) {
-		  r= m % n; m= n; n= r;
+		  r = m % n; m = n; n = r;
 		}
 		return m;
 	}
@@ -207,13 +207,13 @@ public class Kraitchik{
 	 * @return renvoie la liste des opérations effectuées pour obtenir un vecteur du noyau
 	 */
 	public static ArrayList<Integer> pivotGauss(ArrayList<ArrayList<Integer>> M, ArrayList<ArrayList<Integer>> historique){
-		int colonePivot = 0;
+		int colonnePivot = 0;
 		ArrayList<Integer> lignesPivot = new ArrayList<>();
 		while(!contientLigneNulle(M)){
 			for(int i = 0; i < M.size(); i++){
-				if(M.get(i).get(colonePivot) == 1 && !lignesPivot.contains(i)){
+				if(M.get(i).get(colonnePivot) == 1 && !lignesPivot.contains(i)){
 					for(int j = i + 1; j < M.size(); j++){
-						if(M.get(j).get(colonePivot) == 1){
+						if(M.get(j).get(colonnePivot) == 1){
 							M.set(j,produitF2(M.get(i), M.get(j)));
 							historique.set(j, majHistorique(historique.get(i), historique.get(j)));
 						}
@@ -259,10 +259,13 @@ public class Kraitchik{
 		ArrayList<Integer> premiers = premiersInfB(b);
 		ArrayList<Integer> xi = new ArrayList<>();
 		ArrayList<Integer> qi = new ArrayList<>();
-		int x = Math.round(Math.round(Math.sqrt(n))) + 1;
+		int x = (int) Math.floor(Math.sqrt(n)) + 1;
 
 		while(xi.size() != piB + 1){
-			if(friable(polyKraitchik(x, n), b)){
+                        int q = polyKraitchik(x, n);
+			if(friable(q, b)){
+			    xi.add(x);
+			    qi.add(q);
 				xi.add(x);
 				qi.add(polyKraitchik(x, n));
 			}
@@ -303,7 +306,7 @@ public class Kraitchik{
 
 	public static void main(String[] args){
 		if(args.length != 3){
-			System.out.println("Le programme attend en premier un entier n impair à factoriser, en duxième une borne B de friabilité et enfin le nombre de nombres premiers inférieurs ou égaux à B.");
+			System.out.println("Le programme attend en premier un entier n impair à factoriser, en deuxième une borne B de friabilité et enfin le nombre de nombres premiers inférieurs ou égaux à B.");
 			return;
 		}
 		int n = Integer.valueOf(args[0]);
