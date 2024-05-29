@@ -260,18 +260,14 @@ public class Kraitchik{
 		ArrayList<Integer> qi = new ArrayList<>();
 		int x = (int) Math.floor(Math.sqrt(n)) + 1;
 		int piB = premiers.size();
-
 		while(xi.size() != piB + 1){
             int q = polyKraitchik(x, n);
 			if(friable(q, b)){
 			    xi.add(x);
 			    qi.add(q);
-				xi.add(x);
-				qi.add(polyKraitchik(x, n));
 			}
 			x++;
 		}
-
 		ArrayList<ArrayList<Integer>> M = new ArrayList<ArrayList<Integer>>();
 		for(int i = 0; i < piB + 1; i++){
 			M.add(factoF2BFriable(qi.get(i), premiers));
@@ -311,7 +307,6 @@ public class Kraitchik{
 		}
 		int n = Integer.valueOf(args[0]);
 		int b = Integer.valueOf(args[1]);
-		int piB = Integer.valueOf(args[2]);
 		ArrayList<Integer> facteurs = factoKraitchik(n, b);
 		System.out.print(n + " = ");
 		for(int i = 0; i < facteurs.size() - 1; i++){
