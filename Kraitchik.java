@@ -96,11 +96,11 @@ public class Kraitchik{
 
 	/**
 	 * Construit une liste représentant la factorisation en 
-	 * nombre premiers inférieurs ou égaux à @param premiers.get(premiers.size()-1) de @param n
+	 * puissance de nombres premiers inférieurs ou égaux à @param premiers.get(premiers.size()-1) de @param n
 	 * dans F2
 	 * @param n Nombre @param premier.get(premier.size()-1) friable à factoriser
 	 * @param premiers Liste des nombres premiers inférieurs ou égaux à une certaine borne
-	 * @return Liste représentant la factorisation en nombres premiers de @param n dans F2
+	 * @return Liste représentant la factorisation en puissance de nombres premiers modulo 2 de @param n
 	 */
 	public static ArrayList<Integer> factoF2BFriable(int n, ArrayList<Integer> premiers){
 		ArrayList<Integer> factorisationF2 = new ArrayList<>();
@@ -221,7 +221,7 @@ public class Kraitchik{
 					lignesPivot.add(i);
 				}
 			}
-			colonePivot++;
+			colonnePivot++;
 		}
 		
 		for(int i = 0; i < M.size(); i++){
@@ -252,17 +252,17 @@ public class Kraitchik{
 	 * il n'est pas possible de factoriser de trop gros entiers
 	 * @param n entier à factoriser
 	 * @param b borne avec laquelle on teste la friabilité des résultats du polynome de Kraitchik
-	 * @param piB nombre de nombres premiers inférieurs ou égaux à @param b
 	 * @return renvoie deux facteurs de @param n
 	 */
-	public static ArrayList<Integer> factoKraitchik(int n, int b, int piB){
+	public static ArrayList<Integer> factoKraitchik(int n, int b){
 		ArrayList<Integer> premiers = premiersInfB(b);
 		ArrayList<Integer> xi = new ArrayList<>();
 		ArrayList<Integer> qi = new ArrayList<>();
 		int x = (int) Math.floor(Math.sqrt(n)) + 1;
+		int piB = premiers.size();
 
 		while(xi.size() != piB + 1){
-                        int q = polyKraitchik(x, n);
+            int q = polyKraitchik(x, n);
 			if(friable(q, b)){
 			    xi.add(x);
 			    qi.add(q);
@@ -305,14 +305,14 @@ public class Kraitchik{
 
 
 	public static void main(String[] args){
-		if(args.length != 3){
-			System.out.println("Le programme attend en premier un entier n impair à factoriser, en deuxième une borne B de friabilité et enfin le nombre de nombres premiers inférieurs ou égaux à B.");
+		if(args.length != 2){
+			System.out.println("Le programme attend en premier un entier n impair à factoriser et en second une borne B de friabilité.");
 			return;
 		}
 		int n = Integer.valueOf(args[0]);
 		int b = Integer.valueOf(args[1]);
 		int piB = Integer.valueOf(args[2]);
-		ArrayList<Integer> facteurs = factoKraitchik(n, b, piB);
+		ArrayList<Integer> facteurs = factoKraitchik(n, b);
 		System.out.print(n + " = ");
 		for(int i = 0; i < facteurs.size() - 1; i++){
 			System.out.print(facteurs.get(i) + " x ");
