@@ -317,9 +317,15 @@ public class Kraitchik{
 	 * @return renvoie deux facteurs de @param n
 	 */
 	public static ArrayList<Integer> factoKraitchik(int n, int b){
+		ArrayList<Integer> resultat = new ArrayList<>();
 		ArrayList<Integer> premiers = premiersInfB(b);
 		ArrayList<Integer> xi = new ArrayList<>();
 		ArrayList<Integer> qi = new ArrayList<>();
+		if(isInt(Math.sqrt(n))){
+			resultat.add((int) Math.sqrt(n));
+			resultat.add((int) Math.sqrt(n));
+			return resultat;
+		}
 		int x = (int) Math.floor(Math.sqrt(n)) + 1;
 		int piB = premiers.size();
 		while(xi.size() != piB + 1){
@@ -359,7 +365,6 @@ public class Kraitchik{
 		u = u % n;
 		v = v % n;
 
-		ArrayList<Integer> resultat = new ArrayList<>();
 		resultat.add(pgcd(u + v, n));
 		resultat.add(n / resultat.get(0));
 		
