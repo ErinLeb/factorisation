@@ -73,8 +73,7 @@
 	On observe que sur le principe, utiliser les divisions successives pour établir une factorisation naïve fonctionne toujours (avec le critère de finitude). Cependant, cette méthode est limitée en application pour de très grands entiers, soit en termes d'opérations, soit en termes d'espace et il n'est pas possible de trouver un compromis efficace entre les deux complexités.
 	
 	\subparagraph{Implémentation}
-	Nous avons implémenté cette méthode en \textsc{Java}. La représentation des entiers dans ce langage de programmation nous permet de tester notre algorithme de manière certaine sur des entiers jusqu'à 10 000. Au delà, les nombres ayant une factorisation simple sont factorisables (comme $25590 = 2 \times 3 \times 5 \times 853$) mais d'autres sont indiqués comme des nombres premiers alors que ce n'est pas le cas (comme $25591 = 157 \times 163 $). Il est possible d'obtenir de meilleurs résultats avec d'autres langages de programmation par exemple.
-	
+	Nous avons implémenté cette méthode en \textsc{Java}.	
 	\newpage
 	
 	\section{\LARGE{Méthode de Fermat}}
@@ -168,7 +167,7 @@
 	
 	En calculant $pgcd(u+v, N) = 157$ et $pgcd(u-v, N) = 13$, on obtient donc $N = 13 \times 157$.
 	
-	\paragraph{Trouver ce qui nous intéresse}
+	\paragraph{Trouver une famille qui fonctionne}
 	Nous allons montrer qu'il est toujours possible de trouver une famille $(x_i)_{i \in I}$ telle que $\prod_{i \in I} Q(x_i)$ soit un carré grâce à l'algèbre linéaire.
 
 	\subparagraph{Lemme}
@@ -206,7 +205,42 @@
 	
 	\subparagraph{Exemple}
 	Reprenons l'exemple précédent avec $N = 2041$.
+	
+	Prenons $B = 7$. Donc $r = \pi(7) = 4$ et $(p_1, p_2, p_3, p_4) = (2, 3, 5, 7)$.
+	On veut une famille $(x_i)_{i \in I}$ de taille $r+1 = 5$ tel que $(a_i)_{i \in I}$ est une famille d'entiers 7-friables avec $\forall i \in I, x_i \ge \lfloor \sqrt(2041) \rfloor = 45, a_i = x_i^2 - 2041$. 
+	
+	On prend : 
+	
+	$$(x_i)_{i \in I} = (46, 47, 49, 51, 53)$$
+	$$(a_i)_{i \in I} = (3 \times 5^2, 2^3 \times 3 \times 7, 2^3 \times 3^2 \times 5, 2^4 \times 5 \times 7, 2^8 \times 3)$$
+	
+	On a donc $M = 
+	\begin{pmatrix}
+		0 & 1 & 0 & 0 \\
+		1 & 1 & 0 & 1 \\
+		1 & 0 & 1 & 0 \\
+		0 & 0 & 1 & 1 \\
+		0 & 1 & 0 & 0 
+	\end{pmatrix}$.
+
+ 	On remarque assez facilement que 
+ 	$\begin{pmatrix}
+ 		1\\
+ 		0\\
+ 		0\\
+ 		0\\
+ 		1
+ 	\end{pmatrix}$ est un vecteur du noyau de la transposée de $M$.
  
+ 	On pose donc 
+ 	$$ u = 46 \times 53 $$ 
+ 	$$ v = 2^4 \times 3 \times 5$$
+ 	
+ 	et $pgcd(u+v, 2041) = 157, pgcd(u-v, 2041) = 13$.
+ 	
+ 	On retrouve bien $2041 = 13 \times 157$.
+ 	
+ 	
  	\subparagraph{Choix de B}
 	
 	
