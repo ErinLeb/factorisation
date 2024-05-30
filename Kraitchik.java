@@ -73,20 +73,20 @@ public class Kraitchik{
 		boolean[] tab = new boolean[b + 1];
 		tab[0] = false;
 		tab[1] = false;
-		for(int i = 2; i < b; i++){
+		for(int i = 2; i < tab.length; i++){
 			tab[i] = true;
 		}
 		int i = 2;
 		while(i * i <= b){
 			if(tab[i]){
-				for(int j = i * i; j <= b; j += i){
+				for(int j = i * i; j < tab.length; j += i){
 					tab[j] = false;
 				}
 			}
 			i++;
 		}
 		ArrayList<Integer> premiers = new ArrayList<>();
-		for(int j = 0; j < b + 1; j++){
+		for(int j = 0; j < tab.length; j++){
 			if(tab[j]){
 				premiers.add(j);
 			}
