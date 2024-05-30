@@ -72,6 +72,8 @@
 	
 	On observe que sur le principe, utiliser les divisions successives pour établir une factorisation naïve fonctionne toujours (avec le critère de finitude). Cependant, cette méthode est limitée en application pour de très grands entiers, soit en termes d'opérations, soit en termes d'espace et il n'est pas possible de trouver un compromis efficace entre les deux complexités.
 	
+	\subparagraph{Implémentation}
+	Nous avons implémenté cette méthode en \textsc{Java}. La représentation des entiers dans ce langage de programmation nous permet de tester notre algorithme de manière certaine sur des entiers jusqu'à 10 000. Au delà, les nombres ayant une factorisation simple sont factorisables (comme $25590 = 2 \times 3 \times 5 \times 853$) mais d'autres sont indiqués comme des nombres premiers alors que ce n'est pas le cas (comme $25591 = 157 \times 163 $). Il est possible d'obtenir de meilleurs résultats avec d'autres langages de programmation par exemple.
 	
 	\newpage
 	
@@ -123,6 +125,9 @@
 	
 	\subparagraph{Limites}
 	Cette méthode est rapide pour factoriser des nombres qui sont le produit de deux entiers proches. Pour factoriser 2041 par exemple, il faut aller jusqu'à $k = 40$. Avec la méthode suivante, le nombre d'opérations est moins important.
+	
+	\subparagraph{Implémentation}
+	Nous avons implémenté cette méthode en \textsc{Java} et en \textsc{OCaml}.
 	
 	\newpage
 	
@@ -202,7 +207,7 @@
 	\subparagraph{Exemple}
 	Reprenons l'exemple précédent avec $N = 2041$.
  
- 	\subparagraph{Choisir B}
+ 	\subparagraph{Choix de B}
 	
 	
 	
@@ -211,7 +216,8 @@
 	
 	
 	
-	
+	\subparagraph{Implémentation}
+	Nous avons implémenté cette méthode en \textsc{Java}.
 	
 	\newpage
 	\section{\LARGE{Références}}
