@@ -247,7 +247,7 @@ public class Kraitchik{
 	}
 
 	/**
-	 * Vérifie si ma valeur numérique d'un double est entière
+	 * Vérifie si la valeur numérique d'un double est entière
 	 * @param d double dont on teste la valeur
 	 * @return true si le double est entier, false sinon
 	 */
@@ -275,7 +275,7 @@ public class Kraitchik{
 	}
 
 	/**
-	 * Donne la représentation en puissances de facteurs premiers d'un produit de facteurs de même friabilité, eux même sous cette représentation
+	 * Donne la représentation en puissances de facteurs premiers d'un produit de facteurs de même friabilité, eux même sous cette représentation (additionne les puissances)
 	 * @param facteurs liste des facteurs dont on veut la représentation du produit
 	 * @return liste représentant la décomposition en puissances de facteurs premiers du produit de facteurs
 	 */
@@ -330,7 +330,7 @@ public class Kraitchik{
 		int piB = premiers.size();
 		while(xi.size() != piB + 1){
             int q = polyKraitchik(x, n);
-			if(friable(q, b) && !isInt(Math.sqrt(q))){
+			if(friable(q, b)){
 			    xi.add(x);
 			    qi.add(q);
 			}
@@ -362,7 +362,6 @@ public class Kraitchik{
 		for(int i = 0; i < carre.size(); i++){
 			u *= xi.get(carre.get(i));
 		}
-		u = u % n;
 		v = v % n;
 
 		resultat.add(pgcd(u + v, n));
