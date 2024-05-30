@@ -290,7 +290,7 @@ public class Kraitchik{
 			z *= qi.get(carre.get(i));
 		}
 		y = y % n;
-		z = Math.round(Math.round(Math.sqrt(z))) % n;
+		z = (int) Math.floor(Math.sqrt(z)) % n;
 
 		ArrayList<Integer> resultat = new ArrayList<>();
 		resultat.add(pgcd(y - z, n));
