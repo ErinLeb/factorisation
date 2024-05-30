@@ -193,12 +193,12 @@
 	\end{eqnarray*}
 	
 	On pose $M$ la matrice dans $\mathbb{F}_2$ de taille $(m,r)$ avec aux coordonnées $(i,j)$,  $\alpha_{i,j}$ modulo 2. 
-	Comme $rg(M) \le r < m$, les vecteurs lignes forment un système lié, donc il existe $I \subset \{1, ..., m\}$ tel que $\sum_{i \in I} l_i = 0$ et donc il existe une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. 
-	
-	Si on pose $\lambda_i = 1 \iff a_i \in I$, chaque vecteur de $\mathbb{F}_2^{m}$  du noyau de l'application linéaire dont la matrice est la transposée de M permet d'obtenir une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. Notons que le noyau est non nul par le théorème du rang.
-	
+	Comme $rg(M) \le r < m$, les vecteurs lignes forment un système lié, donc il existe $I \subset \{1, ..., m\}$ tel que, pour $l_i$ la i-ème ligne, $\sum_{i \in I} l_i = 0$ et donc il existe une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. 
 	
 	Ainsi, on a montré qu'en prenant suffisamment d'éléments $a_i$ B-friables, c'est à dire pour que la matrice M ne soit pas carrée, il existe forcément une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré.
+	
+	\subparagraph{Remarque}
+	Si on pose $\lambda_i = 1 \iff a_i \in I$, chaque vecteur de $\mathbb{F}_2^{m}$  du noyau de l'application linéaire dont la matrice est la transposée de M permet d'obtenir une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. Notons que le noyau est non nul par le théorème du rang.
 	
 	
 	\subparagraph{En pratique}
@@ -247,7 +247,7 @@
  	\subparagraph{Choix de B}
 	
 	On admet ici que $B$ est choisi de sorte que, si on factorise l'entier $N$, $B$ est une constante de l'ordre de 
-	$$exp(\frac{1}{2} \sqrt(\log(N) \log(\log(N)))$$
+	$$exp(\frac{1}{2} \sqrt{(\log(N) \log\log(N))})$$
 		
 	\subparagraph{Implémentation}
 	Nous avons implémenté cette méthode en \textsc{Java}.
@@ -261,7 +261,7 @@
 		\item \href{https://www.utc.fr/~wschon/sr06/UtCrible/UtCrible.html#about}{Démonstrateur du crible quadratique - Université de Technologie de Compiègne}
 		\item \href{https://www.tangente-mag.com/article.php?id=7059}{La factorisation des grands entiers : de Fermat au code RSA - tangente-mag.com}
 		\item \href{https://fr.wikipedia.org/wiki/M%C3%A9thode_de_factorisation_de_Fermat}{Méthode de factorisation de Fermat - Wikipedia}	
-		\item\href{https://mathrix.fr/maths-expertes/arithmetique/nombres-premiers-et-critere-darret-1359}{Cours sur les nombres premiers et le critère d'arrêt}
+		\item\href{https://www.capes-de-maths.com/lecons/lecon13.pdf}{Cours de CAPES sur les nombres premiers}
 	\end{itemize}
 	
 	
