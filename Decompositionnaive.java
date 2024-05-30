@@ -2,16 +2,45 @@ import java.lang.Math;
 import java.util.ArrayList;
 
 public class Decompositionnaive{
-    static final int[] DiviseursPremiers = new int[]{2,3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,73, 79, 83, 89, 97};
+    static ArrayList<Integer> DiviseursPremiers = new ArrayList<>();
+
+    /**
+	 * Construit la liste des nombres premiers inférieurs ou égaux à @param b 
+	 * avec la méthode du crible d'Eratosthène
+	 * @param b borne
+	 * @return la liste des nombres premiers inférieurs ou égaux à @param b
+	 */
+	public static ArrayList<Integer> premiersInfB(int b){
+		boolean[] tab = new boolean[b + 1];
+		tab[0] = false;
+		tab[1] = false;
+		for(int i = 2; i < tab.length; i++){
+			tab[i] = true;
+		}
+		int i = 2;
+		while(i * i <= b){
+			if(tab[i]){
+				for(int j = i * i; j < tab.length; j += i){
+					tab[j] = false;
+				}
+			}
+			i++;
+		}
+		ArrayList<Integer> premiers = new ArrayList<>();
+		for(int j = 0; j < tab.length; j++){
+			if(tab[j]){
+				premiers.add(j);
+			}
+		}
+		return premiers;
+	}
 
     public static boolean est_premier(int x){
-        assert(x <= 10000);
-        
-        for(int i = 0; i < DiviseursPremiers.length; i++){
-            if(DiviseursPremiers[i] > (int) Math.floor(Math.sqrt(x))){
+        for(int i = 0; i < DiviseursPremiers.size(); i++){
+            if(DiviseursPremiers.get(i) > (int) Math.floor(Math.sqrt(x))){
                 break;
             }
-            if(x%DiviseursPremiers[i] == 0){
+            if(x%DiviseursPremiers.get(i) == 0){
                 return false;
             }
         }
@@ -19,11 +48,6 @@ public class Decompositionnaive{
     }
 
     public static void factorisation(int x){
-        if(x > 10000){
-            System.out.println("Nombre trop grand");
-            return;
-        }
-
         if(est_premier(x)){
             System.out.println("Ce nombre est premier.");
             System.out.println(x + " = 1 x " + x);
@@ -34,10 +58,10 @@ public class Decompositionnaive{
         int pi = 0; //indice du plus petit diviseur 
         int reste = x;
         while(reste > 1){
-            for(int j = pi; j < DiviseursPremiers.length; j++){ //on commence au plus petit diviseur
-                if(reste%DiviseursPremiers[j] == 0){
-                    diviseurs.add(DiviseursPremiers[j]);
-                    reste = reste/DiviseursPremiers[j];
+            for(int j = pi; j < DiviseursPremiers.size(); j++){ //on commence au plus petit diviseur
+                if(reste%DiviseursPremiers.get(j) == 0){
+                    diviseurs.add(DiviseursPremiers.get(j));
+                    reste = reste/DiviseursPremiers.get(j);
                     pi = j;
                     break;
                 }
@@ -65,8 +89,9 @@ public class Decompositionnaive{
 
     public static void main(String[] args) {
         if(args.length != 1){
-            System.out.println("Donnez un nombre à factoriser plus petit que 10 000 s'il vous plaît.");
+            System.out.println("Donnez un nombre à factoriser s'il vous plaît.");
         }else{
+            DiviseursPremiers = premiersInfB((int) Math.floor(Math.sqrt(Integer.valueOf(args[0]))));
             factorisation(Integer.valueOf(args[0]));
         }
     }
