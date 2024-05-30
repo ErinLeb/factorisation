@@ -77,7 +77,7 @@
 	On observe que sur le principe, utiliser les divisions successives pour établir une factorisation naïve fonctionne toujours (avec le critère de finitude). Cependant, cette méthode est limitée en application pour de très grands entiers, soit en termes d'opérations, soit en termes d'espace et il n'est pas possible de trouver un compromis efficace entre les deux complexités.
 	
 	\subparagraph{Implémentation}
-	Nous avons implémenté cette méthode en \textsc{Java}.	
+	Nous avons implémenté cette méthode en \textsc{Java}. En compilant et en le fichier Decompositionnaive avec en argument l'entier $N$ que l'on souhaite factoriser, on peut connaitre sa décompostion en facteurs premiers. Dans un premier temps, on construit une liste des entiers premiers qui ne dépassent pas la racine de $N$ avec la méthode \textit{premiersInfB} appliquée à la racine de $N$. Ensuite, on fait appel à la méthode \textit{factorisation} qui vérifie si $N$ est premier en regardant si $N$ n'est pas congru à 0 pour chaque entier premier de la liste établie. Passée cette étape, si $N$ n'est pas premier, on rentre dans une boucle qui permet de garder en mémoire les diviseurs premiers de $N$ et leur multiplicité. On finit par afficher le produit de tous les éléments de la liste ainsi établie des diviseurs.
 	\newpage
 	
 	\section{\LARGE{Méthode de Fermat}}
@@ -251,6 +251,7 @@
 		
 	\subparagraph{Implémentation}
 	Nous avons implémenté cette méthode en \textsc{Java}.
+	
 	
 	\newpage
 	\section{\LARGE{Références}}
