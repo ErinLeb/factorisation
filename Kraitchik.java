@@ -247,6 +247,15 @@ public class Kraitchik{
 	}
 
 	/**
+	 * Vérifie si ma valeur numérique d'un double est entière
+	 * @param d double dont on teste la valeur
+	 * @return true si le double est entier, false sinon
+	 */
+	public static boolean isInt(double d){
+    	return d == (int) d;
+	}
+
+	/**
 	 * Factorise un entier @param n selon la méthode de Kraitchik
 	 * (Disclaimer) du fait de la représentation des entiers en Java, 
 	 * il n'est pas possible de factoriser de trop gros entiers
@@ -262,7 +271,7 @@ public class Kraitchik{
 		int piB = premiers.size();
 		while(xi.size() != piB + 1){
             int q = polyKraitchik(x, n);
-			if(friable(q, b)){
+			if(friable(q, b) && !isInt(Math.sqrt(q))){
 			    xi.add(x);
 			    qi.add(q);
 			}
