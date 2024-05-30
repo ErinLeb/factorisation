@@ -25,7 +25,7 @@
 	
 	\section{\LARGE{Factorisation naïve par divisions successives}}
 	\subparagraph{}
-	\textbf{\underline{Principe :}} trouver le plus petit diviseur de  $\mathit{n}$, i.e diviser  $\mathit{n}$ par tous les nombres premiers plus petits que lui et voir si un d’eux le divise, puis itérer la méthode sur le quotient, jusqu'à arriver à 1. On récupère les diviseurs et on obtient la factorisation de $\mathit{n}$.
+	\textbf{\underline{Principe :}} trouver le plus petit diviseur de  $n$, i.e diviser  $n$ par tous les nombres premiers plus petits que lui et voir si un d’eux le divise, puis itérer la méthode sur le quotient, jusqu'à arriver à 1. On récupère les diviseurs et on obtient la factorisation de $n$.
 	
 	\subparagraph{Exemple}
 	Soit n = 28.
@@ -38,27 +38,31 @@
 	
 	On obtient donc 28 = 2 $\times$ 2 $\times$ 7
 	
-	\subparagraph{Lemme}
+	\subparagraph{Théorème d'arrêt}
 	
-	Le plus petit diviseur de $\mathit{N}$ ne dépasse pas $\sqrt{N}$.
+	Soit $N \in \mathbb{N}, N \ge 2$, 
+	\begin{itemize}
+		\item $N$ admet au moins un diviseur premier,
+		\item Si $N$ n'est pas premier, il admet au moins un diviseur premier $p$ tel que $p \le \sqrt(N)$.
+	\end{itemize}
 	
-	En effet, prenons $p$ le plus petit diviseur de $\mathit{N}$. Alors $\mathit{N = p}$ $\times$ $\mathit{q}$  avec q un entier (p <= q par minimalité de p). On a $\mathit{p² <= p}$ $\times$ $\mathit{q = N}$ donc $\mathit{p <= }$$\sqrt{N}$. 
+	En effet, prenons $p$ le plus petit diviseur de $N$. Alors $N = p \times q$  avec $q$ un entier ($p \le q$ par minimalité de $p$). On a ${p^2 \le p \times q = N}$ donc $p \le \sqrt{N}$. 
 	
 	\subparagraph{Critère de finitude}	
 	
-	Soit $\mathit{N}$ l'entier que l'on veut factoriser. 
+	Soit $N$ l'entier que l'on veut factoriser. 
 	
-	Si $\mathit{N}$ est premier, alors, l'algorithme se finit quand on a testé tous les nombres premiers inférieurs à $\mathit{N}$ : aucun diviseur n'ayant été trouvé, c'est comme cela qu'on en déduit qu'il est premier, i.e qu'il n'a pas de diviseur premier autre que 1 et lui-même. 
+	Si $N$ est premier, alors, l'algorithme se finit quand on a testé tous les nombres premiers inférieurs à $N$ : aucun diviseur n'ayant été trouvé, c'est comme cela qu'on en déduit qu'il est premier, i.e qu'il n'a pas de diviseur premier autre que 1 et lui-même. 
 	
-	Si $\mathit{N}$ n'est pas premier, alors il est divisible par plusieurs entiers premiers plus petits que lui. La méthode permet de les trouver dans l'ordre croissant et si on considère les quotients successifs comme une suite, celle-ci est strictement décroissante et minorée par 1 donc elle est finie.
+	Si $N$ n'est pas premier, alors il est divisible par plusieurs entiers premiers plus petits que lui. La méthode permet de les trouver dans l'ordre croissant et si on considère les quotients successifs comme une suite, celle-ci est strictement décroissante et minorée par 1 donc elle est finie.
 	
 	\subparagraph{Optimisation}
 	\begin{itemize}	
-		\item On peut effectuer l'algorithme sur les $\mathit{p-1}$ diviseurs plus petits de $\mathit{N}$ (avec $\mathit{p}$ le nombre de facteurs premiers dans la factorisation de $\mathit{N}$) et ajouter le dernier quotient (qui est un entier premier) ce qui permet de ne tester que les entiers qui ne dépassent pas la racine du quotient à chaque itération.
+		\item On peut effectuer l'algorithme sur les $p-1$ diviseurs plus petits de $N$ (avec $p$ le nombre de facteurs premiers dans la factorisation de $N$) et ajouter le dernier quotient (qui est un entier premier) ce qui permet de ne tester que les entiers qui ne dépassent pas la racine du quotient à chaque itération.
 		
 		Si $N = p_1 \times$ ... $\times p_q$ avec $p_1 \leq$ ... $\leq p_q$ premiers, pour i $\in$ \{1, ..., q-1\}, $p_i$ est le plus petit diviseur premier de l = $p_i$ $\times$ .... $\times$ $p_q$ donc $p_i$ ne dépasse pas $\sqrt(l)$.
 		
-		\item Si $\mathit{d|N}$, il faut ajouter $\mathit{d}$ aux diviseurs et continuer l'algorithme sur le quotient de la division. Si $\mathit{d \nmid N}$, on sait que tous ses multiples ne divisent pas $\mathit{N}$ non plus. Si on teste chaque diviseur, le nombre de division est linéaire. Ainsi, pour de très grands nombres, il pourrait être intéressant de ne pas faire de divisions inutiles. Ici, si on a une liste des entiers premiers à tester, on pourrait donc retirer ces multiples. Pour avoir une réelle optimisation, il faudrait faire attention à la suppression de ces valeurs de la liste. En effet, si on ne fait pas cette opération avec une complexité en temps constant, on ne gagne rien, voire on fait plus d'opérations que si on laissait les divisions inutiles. 
+		\item Si $d \mid N$, il faut ajouter $d$ aux diviseurs et continuer l'algorithme sur le quotient de la division. Si $d \nmid N$, on sait que tous ses multiples ne divisent pas $N$ non plus. Si on teste chaque diviseur, le nombre de division est linéaire. Ainsi, pour de très grands nombres, il pourrait être intéressant de ne pas faire de divisions inutiles. Ici, si on a une liste des entiers premiers à tester, on pourrait donc retirer ces multiples. Pour avoir une réelle optimisation, il faudrait faire attention à la suppression de ces valeurs de la liste. En effet, si on ne fait pas cette opération avec une complexité en temps constant, on ne gagne rien, voire on fait plus d'opérations que si on laissait les divisions inutiles. 
 		
 		On se rend en même temps compte que pour des nombres très grands, stocker $\sqrt{N}$ entiers de plus en plus grands n'est pas viable. Il faut donc trouver une alternative.
 		
@@ -84,7 +88,7 @@
 		
 		\item Une somme ou une différence de nombres impairs est paire.
 		
-		\item Un entier se décompose comme $2^{k}N$ avec $\mathit{k}$ $\in\mathbb{N}$, $\mathit{N}$ un entier impair. Si $\mathit{N}$ est premier, on a donc la décomposition en facteurs premiers, sinon, $\mathit{N}$ admet une factorisation non triviale.
+		\item Un entier se décompose comme $2^{k}N$ avec $k \in \mathbb{N}$, $N$ un entier impair. Si $N$ est premier, on a donc la décomposition en facteurs premiers, sinon, $N$ admet une factorisation non triviale.
 		
 		\item Il existe une bijection entre ${\{(a,b) \in \mathbb{N}^2, a \leq b, N = ab\}}$ et $\{(r,s) \in \mathbb{N}^2, N = r^2 - s^2\}$ 
 		(On peut poser ($r = \frac{a+b}{2}, s = \frac{a_b}{2}$) et ($a=r+S , b = r-s$).)
@@ -93,12 +97,12 @@
 	Comme on souhaite $a,b \in \mathbb{N}^2$ tel que $N = ab$ et que toute la difficulté de la factorisation consiste à trouver ces valeurs, la Méthode de Fermat utilise donc la bijection du lemme $4.$ pour trouver plus facilement des diviseurs de $N$ à l'aide de différences de carrés. Elle est particulièrement efficace quand $N$ est le produit d'entiers proches.
 	
 	\subparagraph{Méthode}
-	On sait qu'un entier est décomposable comme $2^{k}N$, avec $\mathit{N}$ un entier impair. Si $\mathit{N}$ est premier, on a déjà la décomposition en facteurs premiers qui nous intéresse. Sinon, nous allons décomposer $\mathit{N}$ en produit de deux facteurs impairs (auxquels on appliquera la même procédure s'ils ne sont pas premiers). 
+	On sait qu'un entier est décomposable comme $2^{k}N$, avec $N$ un entier impair. Si $N$ est premier, on a déjà la décomposition en facteurs premiers qui nous intéresse. Sinon, nous allons décomposer $N$ en produit de deux facteurs impairs (auxquels on appliquera la même procédure s'ils ne sont pas premiers). 
 	
-	On veut trouver $\mathit{R}$ et $\mathit{S}$ tel que N = R² - S² = (R+S)(R-S). 
-	Pour cela, on commence par poser $\mathit{c = \lfloor \sqrt(N)\rfloor}$ et on va y ajouter $\mathit{k}$ $\in\mathbb{N}$ de plus en plus grand, jusqu'à trouver un $\mathit{S^2}$ convenable. En effet, on pose $\mathit{R = c + k}$ ($\mathit{R}$ est forcément plus grand que  $\mathit{\sqrt{N}}$) dès que $k$ est non nul) pour avoir
-	$\mathit{S^{2} = N - R^{2} = N - (c+k)^{2}}$.
-	Un $\mathit{S^2}$ convenable est donc tel que $\mathit{S} \in \mathbb{N}$. Une fois $\mathit{R}$ et $\mathit{S}$ trouvés, on pourra donc écrire $\mathit{N = (R+S)(R-S)}$.
+	On veut trouver $R$ et $S$ tel que N = R² - S² = (R+S)(R-S). 
+	Pour cela, on commence par poser $c = \lfloor \sqrt(N)\rfloor$ et on va y ajouter $k \in \mathbb{N}$ de plus en plus grand, jusqu'à trouver un $S^2$ convenable. En effet, on pose $R = c + k$ ($R$ est forcément plus grand que  $\sqrt{N}$) dès que $k$ est non nul) pour avoir
+	$S^{2} = N - R^{2} = N - (c+k)^{2}$.
+	Un $S^2$ convenable est donc tel que $S \in \mathbb{N}$. Une fois $R$ et $S$ trouvés, on pourra donc écrire $N = (R+S)(R-S)$.
 	
 	\subparagraph{Exemple}
 	Factorisons 15 par la méthode de Fermat. 
@@ -106,21 +110,21 @@
 	(On sait que 15 = 3 $\times$  5)
 
 	
-	15 étant impair, on a $\mathit{15 = 2^{0}N}$ avec $\mathit{N = 15}$.
+	15 étant impair, on a $15 = 2^{0}N$ avec $N = 15$.
 	
-	$\mathit{c = \lfloor \sqrt(15)\rfloor = 3}$
+	$c = \lfloor \sqrt(15)\rfloor = 3$
 	
-	Si on prend $\mathit{R = c + 0 = 3}$, alors $\mathit{R^2 = 9}$ et $\mathit{S^2 = N - R^2 = 16 - 9 = 7}$. 
+	Si on prend $R = c + 0 = 3$, alors $R^2 = 9$ et $S^2 = N - R^2 = 16 - 9 = 7$. 
 	
-	Or $\sqrt{7}$ n'est pas un entier. 
+	Or $\sqrt{7} \not\in \mathbb{N}$. 
 	
-	On continue avec $\mathit{R = c + 1 = 4}$. 
+	On continue avec $R = c + 1 = 4$. 
 	
-	On a $\mathit{R^2 = 16}$ et $\mathit{S^2 = N - R^2 = 16 - 15 = 1}$.
+	On a $R^2 = 16$ et $S^2 = N - R^2 = 16 - 15 = 1$.
 	
-	On a donc $\mathit{S = 1}$ qui est $\sqrt 1$
+	On a donc $S = 1$ qui est $\sqrt 1$
 	
-	On retrouve bien $\mathit{N = (R+S)(R-S) = (4+1) \times (4-1) = 5 \times 3}$
+	On retrouve bien $N = (R+S)(R-S) = (4+1) \times (4-1) = 5 \times 3$
 	
 	\subparagraph{Limites}
 	Cette méthode est rapide pour factoriser des nombres qui sont le produit de deux entiers proches. Pour factoriser 2041 par exemple, il faut aller jusqu'à $k = 40$. Avec la méthode suivante, le nombre d'opérations est moins important.
@@ -243,13 +247,9 @@
  	
  	\subparagraph{Choix de B}
 	
-	
-	
-	
-	
-	
-	
-	
+	On admet ici que $B$ est choisi de sorte que, si on factorise l'entier $N$, $B$ est une constante de l'ordre de 
+	$$exp(\frac{1}{2} \sqrt(\log(N) \log(\log(N)))$$
+		
 	\subparagraph{Implémentation}
 	Nous avons implémenté cette méthode en \textsc{Java}.
 	
@@ -262,6 +262,7 @@
 		\item \href{https://www.utc.fr/~wschon/sr06/UtCrible/UtCrible.html#about}{Démonstrateur du crible quadratique - Université de Technologie de Compiègne}
 		\item \href{https://www.tangente-mag.com/article.php?id=7059}{La factorisation des grands entiers : de Fermat au code RSA - tangente-mag.com}
 		\item \href{https://fr.wikipedia.org/wiki/M%C3%A9thode_de_factorisation_de_Fermat}{Méthode de factorisation de Fermat - Wikipedia}	
+		\item\href{https://mathrix.fr/maths-expertes/arithmetique/nombres-premiers-et-critere-darret-1359}{Cours sur les nombres premiers et le critère d'arrêt}
 	\end{itemize}
 	
 	
