@@ -362,7 +362,6 @@ public class Kraitchik{
 		for(int i = 0; i < carre.size(); i++){
 			u *= xi.get(carre.get(i));
 		}
-		v = v % n;
 
 		resultat.add(pgcd(u + v, n));
 		resultat.add(n / resultat.get(0));
