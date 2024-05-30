@@ -256,6 +256,59 @@ public class Kraitchik{
 	}
 
 	/**
+	 * Donne la décomposition en puissances de facteurs premiers d'un entier @param premiers.get(premiers.size()-1) friable.
+	 * @param n entier dont on veut la décomposition
+	 * @param premiers liste des nombres premiers dont on se sert dans la décomposition
+	 * @return liste représentant la décomposition en puissances de facteurs premiers d'un entier
+	 */
+	public static ArrayList<Integer> decompositionBFriable(int n, ArrayList<Integer> premiers){
+		ArrayList<Integer> decomposition = new ArrayList<>();
+		for(int i = 0; i < premiers.size(); i++){
+			decomposition.add(0);
+			while(n % premiers.get(i) == 0){
+				n /= premiers.get(i);
+				decomposition.set(i, decomposition.get(i) + 1);
+			}
+		}
+
+		return decomposition;
+	}
+
+	/**
+	 * Donne la représentation en puissances de facteurs premiers d'un produit de facteurs de même friabilité, eux même sous cette représentation
+	 * @param facteurs liste des facteurs dont on veut la représentation du produit
+	 * @return liste représentant la décomposition en puissances de facteurs premiers du produit de facteurs
+	 */
+	public static ArrayList<Integer> decompositionProduitBFriable(ArrayList<ArrayList<Integer>> facteurs){
+		ArrayList<Integer> decomposition = new ArrayList<>();
+		for(int i = 0; i < facteurs.get(0).size(); i++){
+			decomposition.add(0);
+			for(int j = 0; j < facteurs.size(); j++){
+				decomposition.set(i, decomposition.get(i) + facteurs.get(j).get(i));
+			}
+		}
+
+		return decomposition;
+	}
+
+	/**
+	 * Donne la valeur numérique de la racine carrée d'un carré représenté sous forme de puissances de facteurs premiers
+	 * @param carre nombre sous forme de puissances de facteurs premiers dont on veut la valeur numérique de sa racine carrée
+	 * @param premiers liste des nombres premiers utilisés dans la représentation du nombre
+	 * @return la valeur numérique de la racine carrée du nombre.
+	 */
+	public static int recompositionRacineBFriable(ArrayList<Integer> carre, ArrayList<Integer> premiers){
+		int racine = 1;
+		for(int i = 0; i < carre.size(); i++){
+			for(int j = 0; j < carre.get(i); j += 2){
+				racine *= premiers.get(i);
+			}
+		}
+
+		return racine;
+	}
+
+	/**
 	 * Factorise un entier @param n selon la méthode de Kraitchik
 	 * (Disclaimer) du fait de la représentation des entiers en Java, 
 	 * il n'est pas possible de factoriser de trop gros entiers
@@ -291,18 +344,23 @@ public class Kraitchik{
 		}
 
 		ArrayList<Integer> carre = pivotGauss(M, historique);
-
-		int y = 1;
-		int z = 1;
+		ArrayList<ArrayList<Integer>> facteurs = new ArrayList<ArrayList<Integer>>();
 		for(int i = 0; i < carre.size(); i++){
-			y *= xi.get(carre.get(i));
-			z *= qi.get(carre.get(i));
+			facteurs.add(decompositionBFriable(qi.get(carre.get(i)), premiers));
 		}
-		y = y % n;
-		z = (int) Math.floor(Math.sqrt(z)) % n;
+
+		ArrayList<Integer> vCarre = decompositionProduitBFriable(facteurs);
+		
+		int v = recompositionRacineBFriable(vCarre, premiers);
+		int u = 1;
+		for(int i = 0; i < carre.size(); i++){
+			u *= xi.get(carre.get(i));
+		}
+		u = u % n;
+		v = v % n;
 
 		ArrayList<Integer> resultat = new ArrayList<>();
-		resultat.add(pgcd(y - z, n));
+		resultat.add(pgcd(u + v, n));
 		resultat.add(n / resultat.get(0));
 		
 		return resultat;
