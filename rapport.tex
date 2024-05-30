@@ -19,10 +19,9 @@
 	
 	\section{\LARGE{Introduction}}
 	\subparagraph{}
-	D'après le théorème fondamental de l'arithmétique, tout entier supérieur à 1 admet une unique représentation comme produit de nombres premiers. En revanche, une telle décomposition peut être très difficile à déterminer. C'est justement sur ce principe qu'a été créé le chiffrement RSA à la fin des années 70 et aujourd'hui largement utilisé pour sécuriser la plupart des informations en informatique. En effet, cette méthode tire partie du fait qu'il est très simple de multiplier deux nombre mais qu'il peut être très long d'extraire les facteurs premiers d'un nombre composé. Ainsi en 1976, on estimait qu'avec les algorithmes de l'époque il faudrait plus de $10^{20}$ années pour factoriser $2^{251} - 1$, un nombre à 76 chiffres. De nos jours, il est possible d'obtenir ce résultat avec un ordinateur de bureau en moins d'une minute. L'enjeu de la factorisation des grands nombres est donc de créer des algorithmes capables de factoriser des nombres arbitrairement grands en des temps raisonnables dans le but de "casser" le code RSA. Nous allons donc voir quelques méthodes, mises au point à différentes époques permettant de factoriser des nombres plus ou moins grands et plus ou moins rapidement.
-	
+	D'après le théorème fondamental de l'arithmétique, tout entier supé-rieur à 1 admet une unique représentation comme produit de nombres premiers. En revanche, une telle décomposition peut être très difficile à déterminer. C'est justement sur ce principe qu'a été créé le chiffrement RSA à la fin des années 70, aujourd'hui largement utilisé pour sécuriser la plupart des informations en informatique. En effet, cette méthode tire partie du fait qu'il est très simple de multiplier deux nombres mais qu'il peut être très long d'extraire les facteurs premiers d'un nombre composé. Ainsi en 1976, on estimait qu'avec les algorithmes de l'époque il aurait fallu plus de $10^{20}$ années pour factoriser $2^{251} - 1$, un nombre à 76 chiffres. De nos jours, il est possible d'obtenir ce résultat avec un ordinateur de bureau en moins d'une minute. L'enjeu de la factorisation des grands nombres est donc de créer des algorithmes capables de factoriser des nombres arbitrairement grands en des temps raisonnables, dans le but de "casser" le code RSA. Nous allons donc voir quelques méthodes, mises au point à différentes époques, permettant de factoriser des nombres de manière plus ou moins efficace.
 	\subparagraph{}
-	\textbf{\underline{Objectif : }}Explorer les méthodes de factorisation, notamment pour de grands nombres
+	\textbf{\underline{Objectif : }}Explorer les méthodes de factorisation, notamment pour de grands entiers
 	
 	\section{\LARGE{Factorisation naïve par divisions successives}}
 	\subparagraph{}
@@ -101,15 +100,22 @@
 	Un $\mathit{S^2}$ convenable est donc tel que $\mathit{S} \in \mathbb{N}$. Une fois $\mathit{R}$ et $\mathit{S}$ trouvés, on pourra donc écrire $\mathit{N = (R+S)(R-S)}$.
 	
 	\subparagraph{Exemple}
-	Factorisons 15 par la méthode de Fermat. (On sait que 15 = 3 $\times$  5)
+	Factorisons 15 par la méthode de Fermat. 
+	
+	(On sait que 15 = 3 $\times$  5)
+
 	
 	15 étant impair, on a $\mathit{15 = 2^{0}N}$ avec $\mathit{N = 15}$.
 	
 	$\mathit{c = \lfloor \sqrt(15)\rfloor = 3}$
 	
-	Si on prend $\mathit{R = c + 0 = 3}$, alors $\mathit{R^2 = 9}$ et $\mathit{S^2 = N - R^2 = 16 - 9 = 7}$. Or $\sqrt{7}$ n'est pas un entier. 
+	Si on prend $\mathit{R = c + 0 = 3}$, alors $\mathit{R^2 = 9}$ et $\mathit{S^2 = N - R^2 = 16 - 9 = 7}$. 
 	
-	On continue avec $\mathit{R = c + 1 = 4}$. On a $\mathit{R^2 = 16}$ et $\mathit{S^2 = N - R^2 = 16 - 15 = 1}$.
+	Or $\sqrt{7}$ n'est pas un entier. 
+	
+	On continue avec $\mathit{R = c + 1 = 4}$. 
+	
+	On a $\mathit{R^2 = 16}$ et $\mathit{S^2 = N - R^2 = 16 - 15 = 1}$.
 	
 	On a donc $\mathit{S = 1}$ qui est $\sqrt 1$
 	
@@ -130,7 +136,7 @@
 	\end{itemize}
 	
 	On obtient ainsi :
-	$$N = pgcd(u+v) \times pgcd(u-v)$$
+	$$N = pgcd(u+v, N) \times pgcd(u-v, N)$$
 	
 	Pour trouver de tels $u$ et $v$, nous considérons le polynôme de Kraitchik : $Q(X) = X^2 - N  \in \mathbb{Z}[X]$.
 	
