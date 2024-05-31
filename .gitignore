@@ -29,3 +29,9 @@ hs_err_pid*
 .vscode/
 *settings.json
 *.prettierrc
+
+#latex
+*.aux
+*.out
+*.gz
+*.toc
