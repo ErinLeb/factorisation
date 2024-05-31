@@ -130,7 +130,9 @@
 	Cette méthode est rapide pour factoriser des nombres qui sont le produit de deux entiers proches. Pour factoriser 2041 par exemple, il faut aller jusqu'à $k = 40$. Avec la méthode suivante, le nombre d'opérations est moins important.
 	
 	\subparagraph{Implémentation}
-	Nous avons implémenté cette méthode en \textsc{Java} et en \textsc{OCaml}.
+	Nous avons implémenté cette méthode en \textsc{Java} et en \textsc{OCaml}. Nous allons décrire l'implémentation en \textsc{OCaml}.
+
+	La méthode de Fermat ne fonctionnant que sur les entiers impairs, on commence par factoriser notre entier $n$ avec la fonction \textit{factorisation\_pair} qui va factoriser $n$ par la plus grande puissance de 2 possible avant de passer le reste à la fonction \textit{factorisation\_fermat}. Cette deuxième fonction va calculer le reste de la factorisation de manière récursive terminale selon la méthode de Fermat afin d'obtenir une factorisation sous forme de produit de nombres premiers le plus efficacement possible. Cette implémentation a néanmoins une limite. En effet, la limite de réprésentation d'un entier en OCaml est $2^{31} - 1$ et il est possible que la méthode de Fermat ait à calculer un produit plus grand lorsqu'on cherche à factoriser de grands entiers, notamment lorsqu'ils n'admettent pas de diviseur proche de leur racine. Dans ce cas, le programme renverra une factorisation incohérente. C'est le cas avec le nombre 8501453 par exemple, mais pas avec 8501452.
 
 	
 	\section{\LARGE{Méthode de Kraitchik}}
