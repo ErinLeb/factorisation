@@ -251,6 +251,8 @@
 		
 	\subparagraph{Implémentation}
 	Nous avons implémenté cette méthode en \textsc{Java}.
+
+	Dans la fonction factoKraitchik, on commence avec les fonctions friable et polyKraitchik, par calculer une famille de $x_i$ pour lesquels la valeur du polynome de Kraitchik en $x_i$ que l'on nomme $q_i$ est b-friable. On crée ensuite une matrice à valeur dans $\mathbb{F}_2$ représentant la parité des puissances de nombres premiers inférieurs ou égaux à b dans la factorisation des $q_i$. À l'aide des fonctions pivotGauss et majHistorique, on détermine une combinaison linéaire de $q_i$ telle que leur produit est un carré. On connait ainsi, les $x_i$ et les $q_i$ nécessaires à la factorisation de notre entier $n$ d'après la méthode de Kraitchik, et on utilise les fonction decompositionBFriable, decompositionProduitBFriable et recompositionRacineBFriable pour calculer efficacement la racine du produit des $q_i$ que l'on vient de déterminer. De même que pour la méthode de Fermat, l'implémentation de celle de Kraitchik se heurte à la représentation des entiers en \textsc{Java}. En effet, le produit de $x_i$ croit très vite en fonction de n et dépasse souvent $2^{31} - 1$.
 	
 	
 	\newpage
