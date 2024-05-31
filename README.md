@@ -4,5 +4,5 @@
 
 Decker Benjamin & Le Boulc'h Erin
 
-Tuteur : M. Olivier Brunat
+Encadrant : M. Olivier Brunat
 
