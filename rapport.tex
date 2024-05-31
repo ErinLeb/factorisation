@@ -158,9 +158,11 @@
 	
 		$$\prod_{i \in I} x_i^2 \equiv \prod_{i \in I} Q(x_i) [N]$$
 		
-	\subparagraph{Lemme} Soit $u, v \in \mathbb{N}^2$ tels que $u^2 \equiv v^2 [N]$, il y a plus d'une chance sur deux que $u \not\equiv v [N]$.	
+	\subparagraph{Lemme} Soit $N \in \mathbb{N}$, tel que $N$ n'est pas une puissance d'un nombre premier, et $u, v \in \mathbb{N}^2$ tels que $u$ et $v$ sont premiers avec $N$ et $u^2 \equiv v^2 [N]$, il y a plus d'une chance sur deux que $u \not\equiv v [N]$.	
 	
-	\textit{Démonstration} TODO
+	\textit{Démonstration} Soit $N = \prod_{i \in \{1, ..., k\}}p_i$ avec $\forall i \in \{1, ..., k\}, p_i \in \mathbb{N}$ premier impair. Par hypothèse, $k \ge 2$. Soit  $u, v \in \mathbb{N}^2$ tels que $u^2 \equiv v^2 [N]$. 
+	
+	Par le théorème des restes chinois, $x^2 \equiv 1 [N]$ a $2^k$ solutions, donc au moins 4. Deux de ces solutions sont $\pm 1$, d'où l'assertion.
 	
 	\subparagraph{}
 	Il suffit donc de trouver une telle famille $(x_i)_{i \in I}$.
