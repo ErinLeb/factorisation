@@ -19,7 +19,7 @@
 	
 	\section{\LARGE{Introduction}}
 	\subparagraph{}
-	D'après le théorème fondamental de l'arithmétique, tout entier supé-rieur à 1 admet une unique représentation comme produit de nombres premiers. En revanche, une telle décomposition peut être très difficile à déterminer. C'est justement sur ce principe qu'a été créé le chiffrement RSA à la fin des années 70, aujourd'hui largement utilisé pour sécuriser la plupart des informations en informatique. En effet, cette méthode tire partie du fait qu'il est très simple de multiplier deux nombres mais qu'il peut être très long d'extraire les facteurs premiers d'un nombre composé. Ainsi en 1976, on estimait qu'avec les algorithmes de l'époque il aurait fallu plus de $10^{20}$ années pour factoriser $2^{251} - 1$, un nombre à 76 chiffres. De nos jours, il est possible d'obtenir ce résultat avec un ordinateur de bureau en moins d'une minute. L'enjeu de la factorisation des grands nombres est donc de créer des algorithmes capables de factoriser des nombres arbitrairement grands en des temps raisonnables, dans le but de "casser" le code RSA. Nous allons donc voir quelques méthodes, mises au point à différentes époques, permettant de factoriser des nombres de manière plus ou moins efficace.
+	D'après le théorème fondamental de l'arithmétique, tout entier supé-rieur à 1 admet une unique représentation comme produit de nombres premiers. En revanche, une telle décomposition peut être très difficile à déterminer. C'est justement sur ce principe qu'a été créé le chiffrement RSA à la fin des années 70, aujourd'hui largement utilisé pour sécuriser la plupart des informations en informatique. En effet, cette méthode tire partie du fait qu'il est très simple de multiplier deux nombres mais qu'il peut être très long d'extraire les facteurs premiers d'un nombre composé. Ainsi en 1976, on estimait qu'avec les algorithmes de l'époque il aurait fallu plus de $10^{20}$ années pour factoriser $2^{251} - 1$, un nombre à 76 chiffres. De nos jours, il est possible d'obtenir ce résultat avec un ordinateur de bureau en moins d'une minute. L'enjeu de la factorisation des grands nombres est donc de créer des algorithmes capables de factoriser des nombres arbitrairement grands en des temps raisonnables, dans le but de "casser" le code RSA. Nous allons donc voir quelques méthodes permettant de factoriser des nombres de manière plus ou moins efficace.
 	\subparagraph{}
 	\textbf{\underline{Objectif : }}Explorer les méthodes de factorisation, notamment pour de grands entiers
 	
@@ -64,21 +64,20 @@
 		
 		\item Si $d \mid N$, il faut ajouter $d$ aux diviseurs et continuer l'algorithme sur le quotient de la division. Si $d \nmid N$, on sait que tous ses multiples ne divisent pas $N$ non plus. Si on teste chaque diviseur, le nombre de division est linéaire. Ainsi, pour de très grands nombres, il pourrait être intéressant de ne pas faire de divisions inutiles. Ici, si on a une liste des entiers premiers à tester, on pourrait donc retirer ces multiples. Pour avoir une réelle optimisation, il faudrait faire attention à la suppression de ces valeurs de la liste. En effet, si on ne fait pas cette opération avec une complexité en temps constant, on ne gagne rien, voire on fait plus d'opérations que si on laissait les divisions inutiles. 
 		
-		On se rend en même temps compte que pour des nombres très grands, stocker $\sqrt{N}$ entiers de plus en plus grands n'est pas viable. Il faut donc trouver une alternative.
+		On se rend en même temps compte que pour des nombres très grands, stocker en mémoire $\sqrt{N}$ entiers de plus en plus grands n'est pas viable. Il faut donc trouver une alternative.
 		
-		\item Si on utilise une variable qu'on incrémente à chaque fois au lieu de stocker les entiers dans une liste, on se retrouve dans le cas où on fait des divisions inutiles (potentiellement BEAUCOUP de divisions inutiles).
+		\item Si on utilise une variable qu'on incrémente à chaque fois au lieu de garder en mémoire les entiers dans une liste, on se retrouve dans le cas où on fait des divisions inutiles (potentiellement BEAUCOUP de divisions inutiles).
 	\end{itemize}
 	
 	
-	Quand on fait cette méthode sur de petits entiers comme dans l'exemple, c'est assez facile car on connait par coeur les petits nombres premiers ou on peut y avoir facilement accès, or la question suivante se pose pour les entiers très (très) grands : comment savoir par quels entiers diviser pour espérer trouver un diviseur premier ? Faut-il diviser par tous les entiers (pas forcément premiers) plus petits que $\sqrt{N}$, en utilisant un compteur par exemple, au risque d'avoir un très grand nombre de divisions à effectuer (il y a beaucoup plus de nombres entiers que de nombres premiers) ? Faut-il stocker au préalable dans une liste les nombres entiers inférieurs à $\sqrt{N}$ pour réduire le nombre de divisions nécessaires ? Et dans ce cas là, comment établir cette liste (Crible d'Erathostène, application des divisions successives à chaque entier intermédiaire) avec une complexité acceptable dans tous les cas ? (Dans un cas extrême, pour une puissance de 2 très grande, cette méthode serait inefficace car il suffirait de diviser successivement par 2, au lieu de construire cette liste).
+	Quand on applique cette méthode sur de petits entiers comme dans l'exemple, c'est assez facile car on connait par coeur les petits nombres premiers ou on peut y avoir facilement accès, or la question suivante se pose pour les entiers très (très) grands : comment savoir par quels entiers diviser pour espérer trouver un diviseur premier ? Faut-il diviser par tous les entiers (pas forcément premiers) plus petits que $\sqrt{N}$, en utilisant un compteur par exemple, au risque d'avoir un très grand nombre de divisions à effectuer (il y a asymptotiquement beaucoup plus de nombres entiers que de nombres premiers) ? Faut-il mettre au préalable dans une liste les nombres premiers inférieurs à $\sqrt{N}$ pour réduire le nombre de divisions nécessaires ? Et dans ce cas là, comment établir cette liste (Crible d'Erathostène, application des divisions successives à chaque entier intermédiaire) avec une complexité acceptable dans tous les cas ? (Dans un cas extrême, pour une puissance de 2 très grande, cette méthode serait inefficace car il suffirait de diviser successivement par 2, au lieu de construire cette liste).
 	
 	\subparagraph{Conclusion}
 	
-	On observe que sur le principe, utiliser les divisions successives pour établir une factorisation naïve fonctionne toujours (avec le critère de finitude). Cependant, cette méthode est limitée en application pour de très grands entiers, soit en termes d'opérations, soit en termes d'espace et il n'est pas possible de trouver un compromis efficace entre les deux complexités.
+	On observe que sur le principe, utiliser les divisions successives pour établir une factorisation naïve fonctionne toujours (avec le critère de finitude). Cependant, cette méthode est limitée en application pour de très grands entiers, soit en termes d'opérations, soit en termes de mémoire et il ne semble pas possible de trouver un compromis efficace entre les deux complexités.
 	
 	\subparagraph{Implémentation}
-	Nous avons implémenté cette méthode en \textsc{Java}. En compilant et en le fichier Decompositionnaive avec en argument l'entier $N$ que l'on souhaite factoriser, on peut connaitre sa décompostion en facteurs premiers. Dans un premier temps, on construit une liste des entiers premiers qui ne dépassent pas la racine de $N$ avec la méthode \textit{premiersInfB} appliquée à la racine de $N$. Ensuite, on fait appel à la méthode \textit{factorisation} qui vérifie si $N$ est premier en regardant si $N$ n'est pas congru à 0 pour chaque entier premier de la liste établie. Passée cette étape, si $N$ n'est pas premier, on rentre dans une boucle qui permet de garder en mémoire les diviseurs premiers de $N$ et leur multiplicité. On finit par afficher le produit de tous les éléments de la liste ainsi établie des diviseurs.
-	\newpage
+	Nous avons implémenté cette méthode en \textsc{Java}. En compilant et en exécutant le fichier \textit{Decompositionnaive} avec en argument l'entier $N$ que l'on souhaite factoriser, on peut connaitre sa décompostion en facteurs premiers. Dans un premier temps, on construit une liste des entiers premiers qui ne dépassent pas la racine de $N$ avec la méthode \textit{premiersInfB} appliquée à la racine de $N$. Ensuite, on fait appel à la méthode \textit{factorisation} qui vérifie si $N$ est premier en regardant si $N$ n'est pas congru à 0 pour chaque entier premier de la liste établie. Passée cette étape, si $N$ n'est pas premier, on rentre dans une boucle qui permet de garder en mémoire les diviseurs premiers de $N$ et leur multiplicité. On finit par afficher le produit de tous les éléments de la liste ainsi établie des diviseurs.
 	
 	\section{\LARGE{Méthode de Fermat}}
 	
@@ -91,7 +90,7 @@
 		\item Un entier se décompose comme $2^{k}N$ avec $k \in \mathbb{N}$, $N$ un entier impair. Si $N$ est premier, on a donc la décomposition en facteurs premiers, sinon, $N$ admet une factorisation non triviale.
 		
 		\item Il existe une bijection entre ${\{(a,b) \in \mathbb{N}^2, a \leq b, N = ab\}}$ et $\{(r,s) \in \mathbb{N}^2, N = r^2 - s^2\}$ 
-		(On peut poser ($r = \frac{a+b}{2}, s = \frac{a_b}{2}$) et ($a=r+S , b = r-s$).)
+		(On peut poser ($r = \frac{a+b}{2}, s = \frac{a-b}{2}$) et ($a=r+s , b = r-s$).)
 	\end{enumerate}
 	
 	Comme on souhaite $a,b \in \mathbb{N}^2$ tel que $N = ab$ et que toute la difficulté de la factorisation consiste à trouver ces valeurs, la Méthode de Fermat utilise donc la bijection du lemme $4.$ pour trouver plus facilement des diviseurs de $N$ à l'aide de différences de carrés. Elle est particulièrement efficace quand $N$ est le produit d'entiers proches.
@@ -100,7 +99,7 @@
 	On sait qu'un entier est décomposable comme $2^{k}N$, avec $N$ un entier impair. Si $N$ est premier, on a déjà la décomposition en facteurs premiers qui nous intéresse. Sinon, nous allons décomposer $N$ en produit de deux facteurs impairs (auxquels on appliquera la même procédure s'ils ne sont pas premiers). 
 	
 	On veut trouver $R$ et $S$ tel que N = R² - S² = (R+S)(R-S). 
-	Pour cela, on commence par poser $c = \lfloor \sqrt(N)\rfloor$ et on va y ajouter $k \in \mathbb{N}$ de plus en plus grand, jusqu'à trouver un $S^2$ convenable. En effet, on pose $R = c + k$ ($R$ est forcément plus grand que  $\sqrt{N}$) dès que $k$ est non nul) pour avoir
+	Pour cela, on commence par poser $c = \lfloor \sqrt(N)\rfloor$ et on va y ajouter $k \in \mathbb{N}$ de plus en plus grand, jusqu'à trouver un $S^2$ convenable. En effet, on pose $R = c + k$ ($R$ est forcément plus grand que  $\sqrt{N}$ dès que $k$ est non nul) pour avoir
 	$S^{2} = N - R^{2} = N - (c+k)^{2}$.
 	Un $S^2$ convenable est donc tel que $S \in \mathbb{N}$. Une fois $R$ et $S$ trouvés, on pourra donc écrire $N = (R+S)(R-S)$.
 	
@@ -122,9 +121,9 @@
 	
 	On a $R^2 = 16$ et $S^2 = N - R^2 = 16 - 15 = 1$.
 	
-	On a donc $S = 1$ qui est $\sqrt 1$
+	On a donc $S = 1$ qui est $\sqrt 1$.
 	
-	On retrouve bien $N = (R+S)(R-S) = (4+1) \times (4-1) = 5 \times 3$
+	On retrouve bien $N = (R+S)(R-S) = (4+1) \times (4-1) = 5 \times 3$.
 	
 	\subparagraph{Limites}
 	Cette méthode est rapide pour factoriser des nombres qui sont le produit de deux entiers proches. Pour factoriser 2041 par exemple, il faut aller jusqu'à $k = 40$. Avec la méthode suivante, le nombre d'opérations est moins important.
@@ -138,7 +137,7 @@
 	\section{\LARGE{Méthode de Kraitchik}}
 	
 	\paragraph{Principe}
-	Pour factoriser un entier $N$ impair, nous allons utiliser le principe suivant : on identifie $u$ et $v$ des entiers tels que :
+	Pour factoriser un entier $N$ impair, nous allons utiliser le principe suivant : on identifie $u$ et $v$ des entiers tels que 
 	\begin{itemize}
 		\item $N \mid(u+v)(u-v) \iff u^2 \equiv v^2 [N]$
 		\item $N \nmid(u+v)$ et $ N \nmid(u-v) \iff u \not\equiv \pm v [N]$ 
@@ -147,15 +146,23 @@
 	On obtient ainsi :
 	$$N = pgcd(u+v, N) \times pgcd(u-v, N)$$
 	
-	Pour trouver de tels $u$ et $v$, nous considérons le polynôme de Kraitchik : $Q(X) = X^2 - N  \in \mathbb{Z}[X]$.
+	Pour trouver de tels $u$ et $v$, nous considérons le polynôme de Kraitchik : $$Q(X) = X^2 - N  \in \mathbb{Z}[X]$$
 	
-	(*) Prenons une famille d'entiers $(x_i)_{i \in I}$ tel que $\forall i \in I, \prod_{i \in I} Q(x_i) = v^2, v \in \mathbb{N}$. On pose $\prod_{i \in I}x_i^2 = u^2$.
+	Prenons une famille d'entiers $(x_i)_{i \in I}$ telle que
+	
+	 $$\forall i \in I, \prod_{i \in I} Q(x_i) = v^2, v \in \mathbb{N}$$ 
+	 
+	  On pose $u^2 = \prod_{i \in I}x_i^2$.
 	
 	 Alors on a : 
 	
 		$$\prod_{i \in I} x_i^2 \equiv \prod_{i \in I} Q(x_i) [N]$$
 		
-	On admet qu'il y a une grande possibilité que $u \not\equiv v [N]$.	
+	\subparagraph{Lemme} Soit $u, v \in \mathbb{N}^2$ tels que $u^2 \equiv v^2 [N]$, il y a plus d'une chance sur deux que $u \not\equiv v [N]$.	
+	
+	\textit{Démonstration} TODO
+	
+	\subparagraph{}
 	Il suffit donc de trouver une telle famille $(x_i)_{i \in I}$.
 	
 	\paragraph{Exemple}
@@ -197,16 +204,15 @@
 	On pose $M$ la matrice dans $\mathbb{F}_2$ de taille $(m,r)$ avec aux coordonnées $(i,j)$,  $\alpha_{i,j}$ modulo 2. 
 	Comme $rg(M) \le r < m$, les vecteurs lignes forment un système lié, donc il existe $I \subset \{1, ..., m\}$ tel que, pour $l_i$ la i-ème ligne, $\sum_{i \in I} l_i = 0$ et donc il existe une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. 
 	
-	Ainsi, on a montré qu'en prenant suffisamment d'éléments $a_i$ B-friables, c'est à dire pour que la matrice M ne soit pas carrée, il existe forcément une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré.
+	Ainsi, on a montré qu'en prenant suffisamment d'éléments $a_i$ B-friables, c'est à dire pour que la matrice M ne soit pas carrée, donc que le noyau soit non nul par le théorème du rang, il existe forcément une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré.
 	
 	\subparagraph{Remarque}
-	Si on pose $\lambda_i = 1 \iff a_i \in I$, chaque vecteur de $\mathbb{F}_2^{m}$  du noyau de l'application linéaire dont la matrice est la transposée de M permet d'obtenir une famille $(a_i)_{i \in I}$ telle que $\prod_{i \in I} a_i$ est un carré. Notons que le noyau est non nul par le théorème du rang.
-	
+	Si on pose $\lambda_i = 1 \iff a_i \in I$, chaque vecteur de $\mathbb{F}_2^{m}$  du noyau de l'application linéaire dont la matrice est la transposée de M permet d'obtenir un $I \subset \{1,...,m\}$ tel que $\prod_{i \in I} a_i$ est un carré. 
 	
 	\subparagraph{En pratique}
-	Pour factoriser N (supposant qu'il ne s'agit pas d'une puissance d'un nombre premier), on prend donc : 
-	$$(x_i)_{i \in I} \text{ avec } \forall i \in I, x_i \in \mathbb{N}, x_i > \lfloor \sqrt{N} \rfloor$$
-	$$ (a_i)_{i \in I}, \forall i \in I a_i = Q(x_i) = x_i^2 - N$$
+	Pour factoriser N, on prend donc : 
+	$$(x_i)_{i \in I} \text{ avec } \forall i \in I, x_i \in \mathbb{N}, x_i \ge \lfloor \sqrt{N} \rfloor$$
+	$$ (a_i)_{i \in I}, \forall i \in I, a_i = Q(x_i) = x_i^2 - N$$
 	
 	\subparagraph{Exemple}
 	Reprenons l'exemple précédent avec $N = 2041$.
@@ -254,12 +260,12 @@
 	\subparagraph{Implémentation}
 	Nous avons implémenté cette méthode en \textsc{Java}.
 
-	Dans la fonction \textit{factoKraitchik}, on commence avec les fonctions \textit{friable} et \textit{polyKraitchik}, par calculer une famille de $x_i$ pour lesquels la valeur du polynôme de Kraitchik en $x_i$ que l'on nomme $q_i$ est b-friable. On crée ensuite une matrice à valeur dans $\mathbb{F}_2$ représentant la parité des puissances de nombres premiers inférieurs ou égaux à b dans la factorisation des $q_i$. À l'aide des fonctions \textit{pivotGauss} et \textit{majHistorique}, on détermine une combinaison linéaire de $q_i$ telle que leur produit est un carré. On connait ainsi, les $x_i$ et les $q_i$ nécessaires à la factorisation de notre entier $n$ d'après la méthode de Kraitchik, et on utilise les fonctions \textit{decompositionBFriable}, \textit{decompositionProduitBFriable} et \textit{recompositionRacineBFriable} pour calculer efficacement la racine du produit des $q_i$ que l'on vient de déterminer. De même que pour la méthode de Fermat, l'implémentation de celle de Kraitchik se heurte à la représentation des entiers en \textsc{Java}. En effet, le produit de $x_i$ croit très vite en fonction de $n$ et dépasse souvent $2^{31} - 1$.
+	Dans la fonction \textit{factoKraitchik}, on commence, avec les fonctions \textit{friable} et \textit{polyKraitchik}, par calculer une famille de $x_i$ pour lesquels la valeur du polynôme de Kraitchik en $x_i$, que l'on nomme $q_i$, est b-friable. On crée ensuite une matrice à valeur dans $\mathbb{F}_2$ représentant la parité des puissances de nombres premiers inférieurs ou égaux à b dans la factorisation des $q_i$. À l'aide des fonctions \textit{pivotGauss} et \textit{majHistorique}, on détermine une combinaison linéaire de $q_i$ telle que leur produit est un carré. On connait ainsi les $x_i$ et les $q_i$ nécessaires à la factorisation de notre entier $n$ d'après la méthode de Kraitchik, et on utilise les fonctions \textit{decompositionBFriable}, \textit{decompositionProduitBFriable} et \textit{recompositionRacineBFriable} pour calculer efficacement la racine du produit des $q_i$ que l'on vient de déterminer. De même que pour la méthode de Fermat, l'implémentation de celle de Kraitchik se heurte à la représentation des entiers en \textsc{Java}. En effet, le produit de $x_i$ croit très vite en fonction de $n$ et dépasse souvent $2^{31} - 1$.
 	
 	
 	\newpage
 	\section{\LARGE{Références}}
-	Nous nous sommes largement appuyés sur \textsc{Chapitre VI - Méthodes de factorisation} du cours de Cryptographie d'\textsc{Alain Kraus} en 2009-2010 à l'Université Pierre et Marie Curie. Nous avons également pu avoir des précisions, notamment sur l'aspect algébrique des méthodes présentées, de la part de notre encadrant de projet \textsc{Olivier Brunat}, enseignant chercheur de l'IMJ-PRG à l'Université Paris Cité.
+	Nous nous sommes largement fondés sur \textsc{Chapitre VI - Méthodes de factorisation} du cours de Cryptographie d'\textsc{Alain Kraus} de 2009-2010 à l'Université Pierre et Marie Curie. Nous avons également pu avoir des explications, notamment sur l'aspect algébrique des méthodes présentées, de la part de notre encadrant de projet \textsc{Olivier Brunat}, enseignant chercheur de l'IMJ-PRG à l'Université Paris Cité.
 	
 	Voici une liste de ressources que nous avons consulté dans une moindre mesure : 
 	\begin{itemize}
